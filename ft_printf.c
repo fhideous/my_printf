@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../lib/libft.h"
 #include "headers/ft_printf.h"
+//https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/printfFunction.html
 
 typedef struct t_operation
 {
@@ -18,6 +19,7 @@ typedef struct t_operation
 	struct {
 		unsigned char	is_argument;
 		unsigned int	count;
+		unsigned  char	is_zero;
 	}accuracy;
 }				s_operation;
 
@@ -25,6 +27,7 @@ void struct_set (s_operation *oper)
 {
 	oper->accuracy.count = 0;
 	oper->accuracy.is_argument = 0;
+	oper->accuracy.is_zero = 0;
 	oper->width.count = 0;
 	oper->width.is_argument = 0;
 	oper->flag.is_lattice = 0;
@@ -36,17 +39,18 @@ void struct_set (s_operation *oper)
 
 void print_oper (s_operation oper)
 {
-	printf("\n\n======================\n");
-	printf("a.count: %d\n",oper.accuracy.count);
-	printf("a.is_ar: %d\n",oper.accuracy.is_argument);
-	printf("wi.count: %d\n",oper.width.count);
-	printf("wi.is_ar: %d\n",oper.width.is_argument);
-	printf("flag.i_lat: %d\n",oper.flag.is_lattice);
-	printf("flag.i_sp: %d\n",oper.flag.is_space);
-	printf("flag.i_pl: %d\n",oper.flag.is_plus);
-	printf("flag.i_mi: %d\n",oper.flag.is_minus);
-	printf("flag.i_zer: %d\n",oper.flag.is_zero);
-	printf("======================\n\n");
+	printf("\n\n==================\n");
+	printf("a.count: \t\t%d\n",oper.accuracy.count);
+	printf("a.is_ar: \t\t%d\n",oper.accuracy.is_argument);
+	printf("a.is_ze: \t\t%d\n",oper.accuracy.is_zero);
+	printf("wi.count: \t\t%d\n",oper.width.count);
+	printf("wi.is_ar: \t\t%d\n",oper.width.is_argument);
+	printf("flag.i_lat: \t%d\n",oper.flag.is_lattice);
+	printf("flag.i_sp: \t\t%d\n",oper.flag.is_space);
+	printf("flag.i_pl: \t\t%d\n",oper.flag.is_plus);
+	printf("flag.i_mi: \t\t%d\n",oper.flag.is_minus);
+	printf("flag.i_zer: \t%d\n",oper.flag.is_zero);
+	printf("==================\n\n");
 }
 int print_backslash(char** str)
 {
@@ -99,13 +103,11 @@ int print_line(char** str)
 	}
 	return (i);
 }
+// 0 Работает только с d i o u x X a A e E f F g G
+// если есть + , пробел игнорируется
 
-
-unsigned int check_flag(char **str, s_operation *oper)
+void check_flag(char **str, s_operation *oper)
 {
-	int i;
-
-	i = -1;
 	if (*(++*str) == '-')
 	{
 		oper->flag.is_minus = 1;
@@ -131,42 +133,53 @@ unsigned int check_flag(char **str, s_operation *oper)
 		oper->flag.is_lattice = 1;
 		check_flag(&*str, *&oper);
 	}
-	return(i += 1);
 }
 
-unsigned int check_width(char** str, s_operation *oper)
+int n_dig(int a)
+{
+	if(a/10 != 0)
+		return (1 + n_dig(a/10));
+	return (1);
+}
+// числа всегда положительные
+void check_width(char** str, s_operation *oper)
 {
 	if (ft_isdigit (**str))
 		oper->width.count = ft_atoi(*str);
-	else
-		oper->width.count = 0;
 	if (**str == '*')
 		oper->width.is_argument = 1;
-	*str += (oper->width.count);
-	return (oper->width.count);
+	*str += (n_dig(oper->width.count) + oper->width.is_argument);
 }
+// за точкой должно быть целое число, если указана только(.), то точность ==
 
-unsigned int check_accuracy(char** str, s_operation *oper)
+// если указана точность, 0 не учитывается
+void check_accuracy(char** str, s_operation *oper)
 {
+	*(*str)++;
 	if (ft_isdigit (**str))
 		oper->accuracy.count = ft_atoi(*str);
-	else
-		oper->accuracy.count = 0;
-	if (**str == '*')
+	else if (**str == '*')
 		oper->accuracy.is_argument = 1;
-	*str += (1 + oper->accuracy.count);
-	return (oper->accuracy.count);
+	else
+		oper->accuracy.is_zero = 1;
+	*str += (n_dig(oper->accuracy.count) + oper->accuracy.is_argument);
 }
-
-unsigned int check_oper(char** str, s_operation *oper)
+// если спецификатор отличен от тех, что чуществует - ub
+// если аргументов недостаточно - ub
+void check_oper(char** str, s_operation *oper)
 {
 	unsigned int i;
 	i = 0;
-	i += check_flag(&*str, *&oper);
-	i += check_width(&*str, *&oper);
-	if (**str == '/')
-		i += check_accuracy(&*str, *&oper);
-	return (i);
+	check_flag(&*str, *&oper);
+	check_width(&*str, *&oper);
+	if (**str == '.')
+		check_accuracy(&*str, *&oper);
+}
+
+int specifier_processing(va_list *ap, char **str, s_operation *oper, int *count)
+{
+
+	return (0);
 }
 
 int ft_printf(const char *src_str, ...)
@@ -188,10 +201,12 @@ int ft_printf(const char *src_str, ...)
 		if (*str == '%')
 		{
 			struct_set(&operation);
-			count += (int) (check_oper(&str, &operation));
-			str++;
+			check_oper(&str, &operation);
+			if (specifier_processing(&ap, &str, &operation, &count) == -1)
+				return (-1);
 			print_oper(operation);
 		}
 	}
+	va_end(ap);
 	return (count);
 }
