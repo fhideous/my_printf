@@ -148,7 +148,10 @@ void check_width(char** str, s_operation *oper)
 		oper->width.count = ft_atoi(*str);
 	if (**str == '*')
 		oper->width.is_argument = 1;
-	*str += (n_dig(oper->width.count) + oper->width.is_argument);
+	if (oper->width.count == 0)
+		*str += (oper->width.is_argument);
+	else
+		*str += (n_dig(oper->width.count) + oper->width.is_argument);
 }
 // за точкой должно быть целое число, если указана только(.), то точность ==
 
@@ -176,9 +179,123 @@ void check_oper(char** str, s_operation *oper)
 		check_accuracy(&*str, *&oper);
 }
 
-int specifier_processing(va_list *ap, char **str, s_operation *oper, int *count)
+int plus_flag(int integer)
 {
+	if (integer > 0)
+		if (write (1, &"+", 1) == -1)
+			return (-1);
+	return (0);
+}
 
+int write_str(char *str)
+{
+	int i;
+
+	i = 0;
+	while (*(str + i))
+	{
+		if (write(1, str + i, 1) == -1)
+			return (-1);
+		i++;
+	}
+	return (i);
+}
+
+int write_n_symb(int chr, int n)
+{
+	int i;
+
+	i = n;
+	while (n-- > 0)
+		if (write(1, &chr, 1) == - 1)
+			return (-1);
+	return (i);
+}
+
+int minus_flag(int ch, int accuracy)
+{
+	if (ch == 's' || ch == 'c')
+	{
+
+	}
+	if (ch == 'd')
+	{
+
+	}
+}
+
+int width_check(int ch, s_operation oper, char *str)
+{
+	int len;
+	int symb;
+
+	if (oper.flag.is_zero)
+		symb = '0';
+	else
+		symb = ' ';
+
+	len = ft_strlen(str);
+	if (ch == 'd')
+	{
+		if (!oper.flag.is_minus)
+			write_str()
+
+	}
+}
+
+int int_arg(int arg, s_operation oper)
+{
+	char *str;
+	int i;
+
+	i = 0;
+	str = ft_itoa(arg);
+	if (oper.flag.is_plus)
+		i = plus_flag(arg);
+	if (oper.width.count )
+	return (i);
+}
+
+int str_arg(char *arg, s_operation oper)
+{
+	int i;
+
+	i = 0;
+	while (*(arg + i))
+	{
+		if (write(1, arg + i, 1) == -1)
+			return (-1);
+		i++;
+	}
+	return (i);
+}
+
+int char_arg(int arg, s_operation oper)
+{
+	if (write(1, &arg, 1) == -1)
+		return (-1);
+
+	return (1);
+}
+
+int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
+{
+	int n;
+
+	if (**str == '%')
+		*(++*str);				//////Возможно так не стоит делать
+	if (**str == 'd')
+		n = int_arg(va_arg(*ap, int), oper);
+	if (**str == 's')
+		n = str_arg(va_arg(*ap, char*), oper);
+	if (**str == 'c')
+		n = char_arg(va_arg(*ap, int), oper);
+
+	if(n != -1)
+		*count += n;
+	else
+		return (-1);
+	*(++*str);
 	return (0);
 }
 
@@ -202,9 +319,9 @@ int ft_printf(const char *src_str, ...)
 		{
 			struct_set(&operation);
 			check_oper(&str, &operation);
-			if (specifier_processing(&ap, &str, &operation, &count) == -1)
+			if (specifier_processing(&ap, &str, operation, &count) == -1)
 				return (-1);
-			print_oper(operation);
+//			print_oper(operation);
 		}
 	}
 	va_end(ap);
