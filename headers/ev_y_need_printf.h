@@ -47,7 +47,7 @@ int str_arg(char *arg, s_operation oper);
 int char_arg(int arg, s_operation oper);
 
 int plus_flag(int integer);
-int minus_flag(int ch, int accuracy);
-int width_check(int ch, s_operation oper, char *str);
-
+int		width_check(char** str, s_operation oper);
+int		accuracy_check(char **str, s_operation oper);
+int		is_plus_check(char **str, s_operation oper);
 #endif

@@ -12,7 +12,6 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 		n = str_arg(va_arg(*ap, char*), oper);
 	if (**str == 'c')
 		n = char_arg(va_arg(*ap, int), oper);
-
 	if(n != -1)
 		*count += n;
 	else
