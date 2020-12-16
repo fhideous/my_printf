@@ -4,20 +4,29 @@ int int_arg(int arg, s_operation oper)
 {
 	char *str;
 	int i;
-	int len;
+	char *tmp;
 
 	i = 0;
-	str = ft_itoa(arg);
+	str = ft_itoa(arg > 0 ? arg : -arg);
 	//if (oper.flag.is_plus)
 //		i += plus_flag(arg);
 
-	len = ft_strlen(str);
-	accuracy_check(&str, oper);
-	 is_plus_check(&str, oper);
-	i += width_check(&str, oper);
-	print_line(&str);
-	//free (str);
- 	return (i);
+	if (oper.accuracy.count > 0)
+		i += accuracy_check(&str, oper);
+	if (arg < 0)
+	{
+		if (!(tmp = ft_strjoin("-", str)))
+			return (-1);
+		free(str);
+		str = tmp;
+	}
+	i += space_check(&str, oper, arg);
+	if (oper.width.count > ft_strlen(str))
+		i += width_check(&str, oper);
+	if (oper.accuracy.count != 0 || arg != 0)
+		print_line(&str);
+	//free (str);   ////// Need to clear this shit
+	return (i);
 }
 
 int str_arg(char *arg, s_operation oper)

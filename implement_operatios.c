@@ -32,27 +32,38 @@ int		width_check(char** str, s_operation oper)
 		if (oper.flag.is_minus)
 			same_symb_l = ft_memmove(same_symb_l, *str, str_len);
 		else
-			same_symb_l = ft_memmove(same_symb_l + oper.width.count - str_len, *str,
-									 str_len) - oper.width.count + str_len;
+		{
+			if (oper.flag.is_zero)
+				ft_memset(same_symb_l, '0', oper.width.count);
+			same_symb_l = ft_memmove(same_symb_l + oper.width.count -
+									 str_len, *str, str_len) -
+						  oper.width.count + str_len;
+		}
 		free(*str);
 		*str = same_symb_l;
 	}
-	return (ft_strlen(*str));
+	return (ft_strlen(*str) - oper.accuracy.count);
 }
 
-int		is_plus_check(char **str, s_operation oper)
+int		space_check(char **str, s_operation oper, int arg)
 {
 	char *sign_str;
 
-	if (oper.flag.is_plus)
+	if (!oper.flag.is_plus && !oper.flag.is_space)
+		return (0);
+	if (arg < 0)
 	{
-		if (!(sign_str = ft_strjoin("+", *str)))
+		if (!(sign_str = ft_strjoin("-", *str)))
 			return (-1);
-		free((*str));
-		*str = sign_str;
-		return (1);
+		return (0);
 	}
-	return (0);
+	if (!(sign_str = ft_strjoin(" ", *str)))
+		return (-1);
+	if (oper.flag.is_plus)
+		sign_str[0]= '+';
+	free((*str));
+	*str = sign_str;
+	return (1);
 }
 
 int		accuracy_check(char **str, s_operation oper)
@@ -70,7 +81,7 @@ int		accuracy_check(char **str, s_operation oper)
 			return (-1);
 		same_symb_l = ft_memmove(same_symb_l + diff_w_str, *str, oper
 		.accuracy.count) - diff_w_str;
-		free(*str);
+//		free(*str);
 		*str = same_symb_l;
 		diff_w_str += str_len;
 	}

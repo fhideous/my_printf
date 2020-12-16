@@ -50,4 +50,5 @@ int plus_flag(int integer);
 int		width_check(char** str, s_operation oper);
 int		accuracy_check(char **str, s_operation oper);
 int		is_plus_check(char **str, s_operation oper);
+int		space_check(char **str, s_operation oper, int integer);
 #endif
