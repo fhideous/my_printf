@@ -2,6 +2,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define BUF_SIZE 1000000
 
 int find_new_line(char *buf)
 {
@@ -16,25 +19,27 @@ int find_new_line(char *buf)
 	}
 	return (i);
 }
+
 void clear_line(char *buf, int len)
 {
 	int i = -1;
 	while (++i < len)
 		buf[i] = '\0';
 }
+
 size_t count_lines(const char* FNAME)
 {
-	char buf[50];
-	int fd = open( FNAME, O_RDONLY);
+	char buf[BUF_SIZE];
+	int fd = open(FNAME, O_RDONLY);
 	if ( fd == 0 )
 	{
 		return -1;
 	}
 	int count = 0;
-	while(read(fd, buf, 50))
+	while(read(fd, buf, BUF_SIZE))
 	{
 		count += find_new_line(buf);
-		clear_line(buf, 50);
+		clear_line(buf, BUF_SIZE);
 	}
 	return count > 0 ? count + 1 : count;
 }
@@ -87,20 +92,22 @@ int copy_half(const char *file_from, const char *file_to, int count, int flag)
 	int from = open(file_from, O_RDONLY);
 	int to = open(file_to, O_WRONLY);
 
-	char* buf = calloc (51 , sizeof(char));
-	buf[50] = '\0';
+	char* buf = calloc (BUF_SIZE + 1 , sizeof(char));
+	buf[BUF_SIZE] = '\0';
 	int len_to_write = 0;
 	while(curr != start)
 	{
-		read(from, buf, 50);
+		read(from, buf, BUF_SIZE);
 		len_to_write += find_len_remainder(&buf, &curr, start);
 		write(to, buf, len_to_write * sizeof(char));
 	}
 //	free(buf);
-	char *buf_to_file = calloc (51, sizeof(char));
+	char *buf_to_file = calloc (BUF_SIZE + 1, sizeof(char));
 	curr -= start;
-	while (read(from, buf, 50) && curr - start != count / 2)
+	int stop;
+	while ((stop = read(from, buf, BUF_SIZE)) && curr - start != count / 2)
 	{
+		buf[stop] = '\0';
 		int size = 0;
 		curr += to_file(buf, &buf_to_file, count / 2 - curr, &size);
 		write(to, buf_to_file, size * sizeof(char));
@@ -114,5 +121,16 @@ int copy_half(const char *file_from, const char *file_to, int count, int flag)
 
 int main(int argc, char **argv)
 {
+	int line_count;
 
+	if (argc != 4)
+		return (-1);
+	line_count = count_lines(argv[1]);
+	line_count--;
+
+	copy_half(argv[1], argv[2], line_count, 0);
+	copy_half(argv[1], argv[3], line_count, 1);
+
+	//printf("%d", line_count);
+	return (1);
 }
