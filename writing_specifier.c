@@ -20,11 +20,11 @@ int int_arg(int arg, s_operation oper)
 		free(str);
 		str = tmp;
 	}
-	i += space_check(&str, oper, arg);
+//	i += space_check(&str, oper, arg);
 	if (oper.width.count > ft_strlen(str))
 		i += width_check(&str, oper);
-	if (oper.accuracy.count != 0 || arg != 0)
-		print_line(&str);
+	//if (oper.accuracy.count != 0 || arg != 0)
+	i += print_line(&str);
 	//free (str);   ////// Need to clear this shit
 	return (i);
 }

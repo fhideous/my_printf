@@ -25,7 +25,7 @@ int		width_check(char** str, s_operation oper)
 
 	str_len = ft_strlen(*str);
 	diff_w_a = oper.width.count - oper.accuracy.count;
-	if (diff_w_a >= str_len)
+	if (diff_w_a >= 0)
 	{
 		if (!(same_symb_l = line_from_same_asymb(' ', oper.width.count)))
 			return (-1);
@@ -42,7 +42,8 @@ int		width_check(char** str, s_operation oper)
 		free(*str);
 		*str = same_symb_l;
 	}
-	return (ft_strlen(*str) - oper.accuracy.count);
+	//diff_w_a = oper.width.count - ft_strlen(*str);
+	return (0);
 }
 
 int		space_check(char **str, s_operation oper, int arg)
@@ -80,12 +81,10 @@ int		accuracy_check(char **str, s_operation oper)
 		if (!(same_symb_l = line_from_same_asymb('0', oper.accuracy.count)))
 			return (-1);
 		same_symb_l = ft_memmove(same_symb_l + diff_w_str, *str, oper
-		.accuracy.count) - diff_w_str;
+				.accuracy.count) - diff_w_str;
 //		free(*str);
 		*str = same_symb_l;
-		diff_w_str += str_len;
+		return (0);
 	}
-	else
-		diff_w_str = str_len;
-	return (diff_w_str);
+	return (0);
 }

@@ -30,7 +30,7 @@ int ft_printf(const char *src_str, ...)
 	count = 0;
 	str = (char *)src_str;
 	va_start(ap, src_str);
-	while (*str)
+	while (str && *str)
 	{
 		if (((count += print_line(&str)) == -1))
 			return (-1);
