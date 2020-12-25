@@ -10,7 +10,8 @@ int int_arg(int arg, s_operation oper)
 	str = ft_itoa(arg > 0 ? arg : -arg);
 	//if (oper.flag.is_plus)
 //		i += plus_flag(arg);
-
+	if (*str == '0' && oper.accuracy.is_zero)
+		return (0);
 	if (oper.accuracy.count > 0)
 		i += accuracy_check(&str, oper);
 	if (arg < 0)
@@ -32,11 +33,22 @@ int int_arg(int arg, s_operation oper)
 int str_arg(char *arg, s_operation oper)
 {
 	int i;
-
+	char* tmp;
+	char * str = ft_strjoin(arg, "");
 	i = 0;
-	while (*(arg + i))
+	if (oper.accuracy.is_zero)
+		return (0);
+	if (oper.accuracy.count > 0)
+		i += accuracy_check_str(&str, oper);
+
+//	i += space_check(&str, oper, str);
+	if (oper.width.count > ft_strlen(str))
+		i += width_check_str(&str, oper);
+	//if (oper.accuracy.count != 0 || str != 0)
+//	i += print_line(&str);
+	while (*(str + i))
 	{
-		if (write(1, arg + i, 1) == -1)
+		if (write(1, str + i, 1) == -1)
 			return (-1);
 		i++;
 	}
@@ -45,8 +57,8 @@ int str_arg(char *arg, s_operation oper)
 
 int char_arg(int arg, s_operation oper)
 {
-	if (write(1, &arg, 1) == -1)
-		return (-1);
+//	if (write(1, &arg, 1) == -1)
+//		return (-1);
 
 	return (1);
 }

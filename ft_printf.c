@@ -20,6 +20,14 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	return (0);
 }
 
+void check_star (s_operation *oper, va_list *ap)
+{
+	if (oper->width.is_argument)
+		oper->width.count = va_arg(*ap, int);
+	if (oper->accuracy.is_argument)
+		oper->accuracy.count = va_arg(*ap, int);
+}
+
 int ft_printf(const char *src_str, ...)
 {
 	va_list ap;
@@ -40,6 +48,7 @@ int ft_printf(const char *src_str, ...)
 		{
 			struct_set(&operation);
 			check_oper(&str, &operation);
+			check_star(&operation, &ap);
 			if (specifier_processing(&ap, &str, operation, &count) == -1)
 				return (-1);
 //			print_oper(operation);

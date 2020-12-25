@@ -64,7 +64,7 @@ void check_width(char** str, s_operation *oper)
 void check_accuracy(char** str, s_operation *oper)
 {
 	*(*str)++;
-	if (ft_isdigit (**str))
+	if (ft_isdigit (**str) && **str != '0')
 		oper->accuracy.count = ft_atoi(*str);
 	else if (**str == '*')
 		oper->accuracy.is_argument = 1;
