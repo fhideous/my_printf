@@ -21,10 +21,8 @@ int int_arg(int arg, s_operation oper)
 		free(str);
 		str = tmp;
 	}
-//	i += space_check(&str, oper, arg);
 	if (oper.width.count > ft_strlen(str))
 		i += width_check(&str, oper);
-	//if (oper.accuracy.count != 0 || arg != 0)
 	i += print_line(&str);
 	//free (str);   ////// Need to clear this shit
 	return (i);
@@ -52,13 +50,39 @@ int str_arg(char *arg, s_operation oper)
 			return (-1);
 		i++;
 	}
+	free(str);
 	return (i);
 }
 
 int char_arg(int arg, s_operation oper)
 {
-//	if (write(1, &arg, 1) == -1)
-//		return (-1);
+	int i;
+	char* tmp;
 
-	return (1);
+	if (arg == (char)'\0')
+		return (0);
+	char * str = calloc (2, sizeof(char));
+	str[0] = (char)arg;
+	i = 0;
+	if (oper.accuracy.count > 0)
+		i += accuracy_check_str(&str, oper);
+
+//	i += space_check(&str, oper, str);
+	if (oper.width.count > ft_strlen(str))
+		i += width_check_str(&str, oper);
+	//if (oper.accuracy.count != 0 || str != 0)
+//	i += print_line(&str);
+	while (*(str + i))
+	{
+		if (write(1, str + i, 1) == -1)
+			return (-1);
+		i++;
+	}
+	free(str);
+	return (i);
+}
+
+int		unsigned_arg (unsigned int arg, s_operation oper)
+{
+
 }
