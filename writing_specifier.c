@@ -1,5 +1,8 @@
 #include "headers/ev_y_need_printf.h"
 
+
+//#include "headers/libft.h"
+
 int int_arg(int arg, s_operation oper)
 {
 	char *str;
@@ -84,5 +87,22 @@ int char_arg(int arg, s_operation oper)
 
 int		unsigned_arg (unsigned int arg, s_operation oper)
 {
+	char *str;
+	int i;
+	char *tmp;
+
+	i = 0;
+	str = ft_utoa(arg);
+	//if (oper.flag.is_plus)
+//		i += plus_flag(arg);
+	if (*str == '0' && oper.accuracy.is_zero)
+		return (0);
+	if (oper.accuracy.count > 0)
+		i += accuracy_check(&str, oper);
+	if (oper.width.count > ft_strlen(str))
+		i += width_check(&str, oper);
+	i += print_line(&str);
+	//free (str);   ////// Need to clear this shit
+	return (i);
 
 }
