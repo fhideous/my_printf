@@ -49,9 +49,16 @@ void check_flag(char **str, s_operation *oper)
 // числа всегда положительные
 void check_width(char** str, s_operation *oper)
 {
+	int width;
+
 	if (ft_isdigit (**str))
-		oper->width.count = ft_atoi(*str);
-	if (**str == '*')
+	{
+		width = ft_atoi(*str);
+		oper->width.count = width;
+		if (width == 0)
+			*str += 1;
+	}
+		if (**str == '*')
 		oper->width.is_argument = 1;
 	if (oper->width.count == 0)
 		*str += (oper->width.is_argument);
@@ -65,7 +72,10 @@ void check_accuracy(char** str, s_operation *oper)
 {
 	*(*str)++;
 	if (ft_isdigit (**str) && **str != '0')
+	{
 		oper->accuracy.count = ft_atoi(*str);
+		oper->flag.is_zero = 0;
+	}
 	else if (**str == '*')
 		oper->accuracy.is_argument = 1;
 	else
@@ -76,8 +86,8 @@ void check_accuracy(char** str, s_operation *oper)
 // если аргументов недостаточно - ub
 void check_oper(char** str, s_operation *oper)
 {
-	unsigned int i;
-	i = 0;
+//	unsigned int i;
+//	i = 0;
 	check_flag(&*str, *&oper);
 	check_width(&*str, *&oper);
 	if (**str == '.')

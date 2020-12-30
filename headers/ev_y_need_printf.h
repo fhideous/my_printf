@@ -28,6 +28,8 @@ typedef struct t_operation
 }				s_operation;
 
 int		n_dig(int a);
+void set_minus(char **str);
+//unsigned int dectox_int(int a, char *s);
 int		write_str(char *str);
 int		write_n_symb(int chr, int n);
 
@@ -41,6 +43,8 @@ void	check_flag(char **str, s_operation *oper);
 void	check_width(char** str, s_operation *oper);
 void	check_accuracy(char** str, s_operation *oper);
 void	check_oper(char** str, s_operation *oper);
+
+char	*line_from_same_asymb(int symb, int len);
 
 int		int_arg(int arg, s_operation oper);
 int		str_arg(char *str, s_operation oper);

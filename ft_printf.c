@@ -14,6 +14,8 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 		n = char_arg(va_arg(*ap, int), oper);
 	if (**str == 'u')
 		n = unsigned_arg(va_arg(*ap, unsigned int), oper);
+//	if (**str == 'x' || **str== 'X')
+//		n = x_arg(va_arg(*ap, unsigned int));
 	if(n != -1)
 		*count += n;
 	else
@@ -25,9 +27,9 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 void check_star (s_operation *oper, va_list *ap)
 {
 	if (oper->width.is_argument)
-		oper->width.count = va_arg(*ap, int);
+		oper->width.count = va_arg(*ap,unsigned int);
 	if (oper->accuracy.is_argument)
-		oper->accuracy.count = va_arg(*ap, int);
+		oper->accuracy.count = va_arg(*ap,unsigned int);
 }
 
 int ft_printf(const char *src_str, ...)

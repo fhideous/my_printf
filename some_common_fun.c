@@ -7,6 +7,25 @@ int n_dig(int a)
 	return (1);
 }
 
+void set_minus(char **str)
+{
+	int i;
+	char *tmp;
+
+	i = 0;
+	while (*str && !ft_isdigit(*(*str + i)))
+		i++;
+	//if (i != 0)
+	*(*str + i - 1) = '-';
+//	else
+//	{
+//		if (!(tmp = ft_strjoin("-", *str)))
+//			return (-1);
+//			free(*str);
+//			*str = tmp;
+//	}
+}
+
 int write_str(char *str)
 {
 	int i;
