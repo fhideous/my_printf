@@ -3,6 +3,112 @@
 
 //#include "headers/libft.h"
 
+void			*f_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char		*ptr;
+	const unsigned char	*src_ptr;
+
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	ptr = (unsigned char*)dst;
+	src_ptr = (unsigned char*)src;
+	if (src_ptr < ptr)
+		while (len--)
+			*(ptr + len) = *(src_ptr + len);
+	else
+		while (len--)
+			*ptr++ = *src_ptr++;
+	return (dst);
+}
+
+int space_count (char * str)
+{
+	int i;
+	int count;
+
+	i = -1;
+	count = 0;
+	while (str[++i])
+		if (str[i] == ' ')
+			count++;
+	return (count);
+}
+
+int add_minus (char** str, int arg, s_operation oper)
+{
+	char * tmp;
+	int i;
+	int n_len;
+
+	n_len = (int)ft_strlen(*str) - space_count(*str);
+//	if ((oper.flag.is_minus && oper.accuracy.count) && oper.width.count -
+//	oper.accuracy.count)
+//	{
+////		i = 0;
+////		while (!ft_isdigit(*(*str + i)))
+////			i++;
+//		if (!(tmp = ft_strjoin("-", *str)))
+//			return (-1);
+//		free(*str);
+//		*str = tmp;
+//	}else
+	if ((oper.flag.is_zero) && oper.width.count <= n_dig(arg))
+	{
+//		i = 0;
+//		while (!ft_isdigit(*(*str + i)))
+//			i++;
+		if (!(tmp = ft_strjoin("-", *str)))
+			return (-1);
+
+		free(*str);
+		*str = tmp;
+	} else
+	if (oper.accuracy.count >= ft_strlen(*str) || (oper.accuracy.is_zero &&
+	n_len == 1))
+	{
+//		i = 0;
+//		while (!ft_isdigit(*(*str + i)))
+//			i++;
+		if (!(tmp = ft_strjoin("-", *str)))
+			return (-1);
+		free(*str);
+		*str = tmp;
+	}
+	else if (!oper.accuracy.count &&oper.accuracy.is_zero && !oper.width.count)
+	{
+		if (!(tmp = ft_strjoin("-", *str)))
+			return (-1);
+		free(*str);
+		*str = tmp;
+	}
+	else if (!ft_isdigit(**str))
+	{
+		i = 0;
+		while (*(*str + i) == ' ')
+			i++;
+		--i > 0 ? i : 0;
+		*(*str + i) = '-';
+	}
+	else if (ft_isdigit(**str))
+	{
+		if (**str != '0' && !space_count(*str))
+		{
+			if (!(tmp = ft_strjoin("-", *str)))
+				return (-1);
+
+			free(*str);
+			*str = tmp;
+		}else
+		{
+			*str = f_memmove(*str + 1, *str, n_len);
+			if (**str != '0' || oper.accuracy.count)
+				(*str) = *str - 1;
+			**str = '-';
+		}
+	}
+	return (1);
+}
+
 int int_arg(int arg, s_operation oper)
 {
 	char *str;
@@ -20,20 +126,15 @@ int int_arg(int arg, s_operation oper)
 //		i += plus_flag(arg);
 	if (oper.flag.is_minus)
 		oper.flag.is_zero = 0;
-	if (arg < 0 && arg != -2147483648 && !oper.flag.is_zero)
-	{
-		if (!(tmp = ft_strjoin("-", str)))
-			return (-1);
-		free(str);
-		str = tmp;
-	}
-		if (*str == '0' && oper.accuracy.is_zero)
+
+	if (*str == '0' && oper.accuracy.is_zero)
 	{
 		if (oper.width.count == 0)
 			return (0);
 		else
 			str = line_from_same_asymb(' ', oper.width.count);
-//			width_check(&str, oper);
+
+			//			width_check(&str, oper);
 		return(i+= print_line(&str));
 	}
 		//return (i += width_check(&str, oper));
@@ -42,27 +143,36 @@ int int_arg(int arg, s_operation oper)
 
 	if (oper.width.count > ft_strlen(str))
 		i += width_check(&str, oper);
-	if (arg < 0 && arg != -2147483648)
-	{
-//		if (oper.width.count != 0)
+	if (arg < 0)
+		add_minus(&str, arg, oper);
+//	if (arg < 0 && arg != -2147483648 && !oper.flag.is_zero)
+//	{
+//		if (!(tmp = ft_strjoin("-", str)))
+//			return (-1);
+//		free(str);
+//		str = tmp;
+//	}
+//	if (arg < 0 && arg != -2147483648)
+//	{
+////		if (oper.width.count != 0)
+//
+//		//str[ft_strlen(str) - n - 1] = '-';
+//		if (oper.flag.is_zero)
+//		{
+//			if (oper.width.count > n)
+//				str[0] = '-';
+//			else
+//			{
+//				if (!(tmp = ft_strjoin("-", str)))
+//					return (-1);
+//				free(str);
+//				str = tmp;
+//			}
+//		}
+//
 
-		//str[ft_strlen(str) - n - 1] = '-';
-		if (oper.flag.is_zero)
-		{
-			if (oper.width.count > n)
-				str[0] = '-';
-			else
-			{
-				if (!(tmp = ft_strjoin("-", str)))
-					return (-1);
-				free(str);
-				str = tmp;
-			}
-		}
-
-
-	//	else
-	//		set_minus(&str);
+		//	else
+		//		set_minus(&str);
 //		else
 //		if (
 //				(oper.flag.is_zero && (oper.width.count <= n)))
@@ -75,8 +185,8 @@ int int_arg(int arg, s_operation oper)
 //		}else
 //			set_minus (&str);
 
-	//	else
-	//		str[0] = '-';
+		//	else
+		//		str[0] = '-';
 		//else
 //		{
 //			if (!(tmp = ft_strjoin("-", str)))
@@ -84,7 +194,7 @@ int int_arg(int arg, s_operation oper)
 //			free(str);
 //			str = tmp;
 //		}
-	}
+//	}
 	i += print_line(&str);
 	//free (str);   ////// Need to clear this shit
 	return (i);
