@@ -22,6 +22,7 @@ void check_flag(char **str, s_operation *oper)
 	if (*(++*str) == '-')
 	{
 		oper->flag.is_minus = 1;
+		oper->flag.is_zero = 0;
 		check_flag(&*str, *&oper);
 	}
 	if (**str == '+')
@@ -31,7 +32,8 @@ void check_flag(char **str, s_operation *oper)
 	}
 	if (**str == '0' && oper->flag.is_zero == 0)
 	{
-		oper->flag.is_zero = 1;
+		if(!oper->flag.is_minus)
+			oper->flag.is_zero = 1;
 		check_flag(&*str, *&oper);
 	}
 	if (**str == ' ')
@@ -70,11 +72,13 @@ void check_width(char** str, s_operation *oper)
 // если указана точность, 0 не учитывается
 void check_accuracy(char** str, s_operation *oper)
 {
-	*(*str)++;
+	//// !!!!!!!!
+	///если отрицательна, то устанавливать в -1!!!
+	(*str)++;
 	if (ft_isdigit (**str) && **str != '0')
 	{
 		oper->accuracy.count = ft_atoi(*str);
-		oper->flag.is_zero = 0;
+//		oper->flag.is_zero = 0;
 	}
 	else if (**str == '*')
 		oper->accuracy.is_argument = 1;

@@ -1,6 +1,6 @@
 #include "headers/ev_y_need_printf.h"
 
-int n_dig(int a)
+unsigned int n_dig(int a)
 {
 	if(a/10 != 0)
 		return (1 + n_dig(a/10));
@@ -10,7 +10,7 @@ int n_dig(int a)
 void set_minus(char **str)
 {
 	int i;
-	char *tmp;
+//	char *tmp;
 
 	i = 0;
 	while (*str && !ft_isdigit(*(*str + i)))

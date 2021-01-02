@@ -27,7 +27,7 @@ typedef struct t_operation
 	}accuracy;
 }				s_operation;
 
-int		n_dig(int a);
+unsigned int		n_dig(int a);
 void set_minus(char **str);
 //unsigned int dectox_int(int a, char *s);
 int		write_str(char *str);
@@ -36,6 +36,7 @@ int		write_n_symb(int chr, int n);
 void	print_oper (s_operation oper);
 int		print_backslash(char** str);
 int		print_percent (char** str);
+int		print_n_spaces (int n);
 int		print_line(char** str);
 
 void	struct_set (s_operation *oper);
@@ -52,6 +53,7 @@ int		char_arg(int arg, s_operation oper);
 int		unsigned_arg (unsigned int arg, s_operation oper);
 
 int		plus_flag(int integer);
+char	*flag_zero_str(char *str, int len);
 int		width_check(char** str, s_operation oper);
 int		accuracy_check(char **str, s_operation oper);
 int		width_check_str(char** str, s_operation oper);

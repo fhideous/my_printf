@@ -199,15 +199,15 @@ char** line_for_check(char **line, int type, int line_len)
 int main(void)
 {
 	int i;
-	i = 0;
+//	i = 0;
 	//int j[] = {-123456, -99, -10, -1, 0, 1, 10, 99, 123456};
-	int a[] = { 0,-214748368, -9876543, -357, -10, -1, 0,
-			 1, 10, 357, 9251112, 2147483647, 0};
-	int a4[] = {-10};
+	int a[] = {-214748368, -9876543, -357, -10, -1, 0,
+			 1, 10, 357, 9251112, 2147483647};
+	int a1[] = {-3};
 	char *check[] = {
 			"%", "%0","%-", "%5", "%0", "%12",
 			"%.0", "%.3", "%.1", "%.12", "%0.0",
-			"%0.1", "%1.0", "%0.1", "%1.1",
+			"%0.1", "%1.0", "%1.1",
 			"%-0", "%-0.0", "%-0.12", "%-12.0",
 			"%-.12", "%-14", "%-.1", "%.0",
 			"%-3", "%-6.4", "%4.5", "%02.1", "%012.2", "%-012.2",
@@ -219,24 +219,12 @@ int main(void)
 			"%-09.5", "%-9.0", "%04",
 			"%9",	"%09","%01", "%04", "%00", "%-9", "%-.9",
 			"%-.0", "%-0.0" ,  "%05.9", "%09.5",
-			"%-05.9", "%5.3", "%-5.3", "%-09.5", "%-05.9",
-			"%00.0", "%5.3", "%0.2", "%02"
+			"%-05.9", "%5.3", "%-5.3", "%-09.5", "%-9.5", "%-05.9",
+			"%00.0", "%5.3", "%0.2", "%02", "%3.0", "%05.5"
 	};
 
-	char *check45[] = { "%.1", "%00",
-				   "%-.0", "%-0.0", "-12.0", "%00.0", "%09",
+	char *check1[] = {"%05.9"};
 
-				 };
-	char *check4[] = { "%-09.5", "%-9.0", "%04",
-		"%9",	"%09","%01", "%04", "%00", "%-9", "%-.9",
-		"%-.0", "%-0.0" ,  "%05.9", "%09.5",
-		"%-05.9",
-	};
-	char *check5[] = { "%5.3",
-			"%-", "%-0", "%-.0", "%-0.0","%0", "%0.0", "%.0",
-			"%00.0", "%5.3", "%0.2", "%02"
-	};
-	int a1[] = {10, 15};
 
 	int a_len = sizeof(a) / sizeof(a[0]);
 	int len_check = sizeof(check) / sizeof(*check);
@@ -246,8 +234,9 @@ int main(void)
 	char **str_check = line_for_check(check, 's', len_check);
 	char **char_check = line_for_check(check, 'c', len_check);
 	char **un_check = line_for_check(check, 'u', len_check);
-
+//
 	char *b[] = {"He", ",", "Hello ", "world ", "Hello world", "", " ", "!"};
+	char *b1[] = {"!"};
 	char c [] = {'a', 'b', 'c', 'd', '\t', '%',
 			  '\n'};
 	unsigned int d[] = {0, 10, 245, 2147483647, 2147483649, 4294967295,
@@ -263,8 +252,8 @@ int main(void)
 		int b_len = sizeof(b) / sizeof(b[0]);
 	int c_len = sizeof (c) / sizeof(c[0]);
 	int d_len = sizeof (d) / sizeof(d[0]);
-	i = 10;
-	unsigned int p;
+//	i = 10;
+//	unsigned int p;
 //	p = 15;	printf ("%x\n", p);
 //	p = 19;	printf ("%x\n", p);
 //	p = 23;		printf ("%x\n", p);
@@ -280,9 +269,9 @@ int main(void)
 	while (++i < a_len)
 		check_my(a[i], int_check, len_check);
 
-//	i = -1;
-//	while (++i < b_len)
-//		check_my_str(b[i], str_check, len_check);
+	i = -1;
+	while (++i < b_len)
+		check_my_str(b[i], str_check, len_check);
 //	i = -1;
 //	while (++i < c_len)
 //		check_my_char(c[i], char_check, len_check);
@@ -297,9 +286,9 @@ int main(void)
 	while (++i < a_len)
 		check_orig(a[i], int_check, len_check);
 	i = -1;
-//	while (++i < b_len)
-//		check_orig_str(b[i], str_check, len_check);
-//	i = -1;
+	while (++i < b_len)
+		check_orig_str(b[i], str_check, len_check);
+////	i = -1;
 //	while (++i < c_len)
 //		check_orig_char(c[i], char_check, len_check);
 //	i = -1;
@@ -315,158 +304,3 @@ int main(void)
 
 
 
-
-
-
-
-
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%.10d\n", -10));
-//	printf("my_symbols: %d\n",ft_printf("%.10d\n", -10));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%.0d\n", 30));
-//	printf("my_symbols: %d\n",ft_printf("%.0d\n", 30));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%.0d\n", 1));
-//	printf("my_symbols: %d\n",ft_printf("%.0d\n", 1));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+.21d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+.21d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+.2d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+.2d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+.4d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+.4d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+3d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+3d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+5d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+5d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+42.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+42.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+12.42d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+12.42d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+12.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+12.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+42.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+42.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-.21d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-.21d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-.2d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-.2d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-.4d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-.4d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-3d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-3d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-5d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-5d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-42.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-42.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-12.42d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-12.42d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-12.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-12.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-42.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-42.12d\n", 124));
-//
-//	printf ("\nTest: %d\n", ++i);
-//	printf("symbols: %d\n",printf("%+-42.12d\n", 124));
-//	printf("my_symbols: %d\n",ft_printf("%+-42.12d\n", 124));
-//
-
-
-
-
-
-//	printf ("%01s \n", "");
-//	printf ("%5.4d\n", -614);
-//	printf ("%04d\n", -614);
-//	printf ("%4 d\n", -614);
-//	printf ("%4 d\n", 614);
-//	printf ("%4 d\n", -614);
-	//var("%d", 255, 21, 14);
-	//var("%s", "test string", "af", "afw");
-
-//
-//#include <stdio.h>
-//
-//# define FLG_NONE	0b00000000
-//# define FLG_ONE	0b00000001
-//# define FLG_TWO	0b00000010
-//# define FLG_THREE	0b00000100
-//# define FLG_FOUR	0b00001000
-//
-//int main()
-//{
-//	unsigned char	flags;
-//
-//	flags = FLG_NONE;
-//	if (flags & FLG_ONE)
-//		printf("[-] FLG_ONE exist\n");
-//	else
-//		printf("[+] FLG_ONE not exist\n");
-//
-//	flags = flags | FLG_ONE;
-//	if (flags & FLG_ONE)
-//		printf("[+] FLG_ONE exist\n");
-//	else
-//		printf("[-] FLG_ONE not exist\n");
-//
-//	flags = flags | FLG_TWO;
-//	if ((flags & FLG_ONE) && (flags & FLG_TWO))
-//		printf("[+] FLG_ONE and FLG_TWO exist\n");
-//	else
-//		printf("[-] FLG_ONE or FLG_TWO not exist\n");
-//
-//	flags = flags & (~FLG_TWO);
-//	if ((flags & FLG_ONE) && (flags & FLG_TWO))
-//		printf("[-] FLG_ONE and FLG_TWO exist\n");
-//	else
-//		printf("[+] FLG_ONE or FLG_TWO not exist\n");
-//
-//	return (0);
-//}

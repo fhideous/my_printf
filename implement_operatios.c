@@ -46,6 +46,17 @@ int		width_check(char** str, s_operation oper)
 	return (0);
 }
 
+char*	flag_zero_str (char *str, int len)
+{
+	if (len <= 0)
+		return (str);
+	while (len--)
+	{
+		str[len] = '0';
+	}
+	return (str);
+}
+
 int		width_check_str(char** str, s_operation oper)
 {
 	int diff_w_a;
@@ -58,16 +69,19 @@ int		width_check_str(char** str, s_operation oper)
 	{
 		if (!(same_symb_l = line_from_same_asymb(' ', oper.width.count)))
 			return (-1);
-		if (oper.flag.is_minus)
+		if (oper.flag.is_minus )
 			same_symb_l = ft_memmove(same_symb_l, *str, str_len);
+
+		//		else
+//		{
+//			if (oper.flag.is_zero)
+//				same_symb_l = ft_memset(same_symb_l, '0', oper.width.count);
 		else
-		{
-			if (oper.flag.is_zero)
-				ft_memset(same_symb_l, '0', oper.width.count);
 			same_symb_l = ft_memmove(same_symb_l + oper.width.count -
 									 str_len, *str, str_len) -
 						  oper.width.count + str_len;
-		}
+//		}
+
 		free(*str);
 		*str = same_symb_l;
 	}
@@ -99,7 +113,7 @@ int		space_check(char **str, s_operation oper, int arg)
 
 int		accuracy_check(char **str, s_operation oper)
 {
-	char *sign_str;
+//	char *sign_str;
 	int diff_w_str;
 	char *same_symb_l;
 	int str_len;
@@ -121,22 +135,22 @@ int		accuracy_check(char **str, s_operation oper)
 
 int		accuracy_check_str(char **str, s_operation oper)
 {
-	char *sign_str;
 	int diff_w_str;
-	char *same_symb_l;
-	int str_len;
+//	char *tmp;
+	int diff_a_w;
+//	char *line_sps;
 
-	str_len = ft_strlen(*str);
-	diff_w_str = str_len - oper.accuracy.count;
-//	if (diff_w_str > 0)
+	diff_w_str = ft_strlen(*str) - oper.accuracy.count;
+	diff_a_w = oper.accuracy.count - oper.width.count;
+
+//	if (oper.flag.is_zero && diff_a_w > 0)
 //	{
-//		if (!(same_symb_l = line_from_same_asymb('0', oper.accuracy.count)))
+//		line_sps = line_from_same_asymb('0', diff_a_w);
+//		if ((line_sps == -1) || ((tmp = ft_strjoin(line_sps, *str)) == -1))
 //			return (-1);
-//		same_symb_l = ft_memmove(same_symb_l + diff_w_str, *str, oper
-//				.accuracy.count) - diff_w_str;
-////		free(*str);
-//		*str = same_symb_l;
-//		return (0);
+//		free(*str);
+//		free(line_sps);
+//		*str = tmp;
 //	}
 	if (diff_w_str > 0)
 		*(*str + oper.accuracy.count) = '\0';

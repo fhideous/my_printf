@@ -34,12 +34,22 @@ int print_percent (char** str)
 {
 	if (*(*str + 1) == '%')
 	{
-		*(*str)++;
-		*(*str)++;
+		(*str)++;
+		(*str)++;
 		write(1, &"%", 1);
 		return (1);
 	}
 	return (0);
+}
+
+int print_n_spaces (int n)
+{
+	int i;
+
+	i = n;
+	while (i--)
+		write (1, &" ", 1);
+	return (n);
 }
 
 int print_line(char** str)

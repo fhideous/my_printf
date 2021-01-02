@@ -5,7 +5,7 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	int n;
 
 	if (**str == '%')
-		*(++*str);				//////Возможно так не стоит делать
+		(++*str);
 	if (**str == 'd' || **str == 'i')
 		n = int_arg(va_arg(*ap, int), oper);
 	if (**str == 's')
@@ -20,7 +20,7 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 		*count += n;
 	else
 		return (-1);
-	*(++*str);
+	(++*str);
 	return (0);
 }
 
