@@ -145,7 +145,6 @@ int int_arg(int arg, s_operation oper)
 int str_arg(char *arg, s_operation oper)
 {
 	int i;
-//	char* tmp;
 	char * str = ft_strjoin(arg, "");
 	int arg_len;
 
@@ -153,8 +152,6 @@ int str_arg(char *arg, s_operation oper)
 	i = 0;
 	if (oper.accuracy.count > 0 || oper.accuracy.is_zero)
 		i += accuracy_check_str(&str, oper);
-//	if (oper.accuracy.is_zero)
-//		return (print_n_spaces (oper.width.count));
 	if (oper.width.count > ft_strlen(str))
 		i += width_check_str(&str, oper);
 	if (oper.flag.is_zero)
@@ -179,21 +176,16 @@ int str_arg(char *arg, s_operation oper)
 int char_arg(int arg, s_operation oper)
 {
 	int i;
-//	char* tmp;
-
 	if (arg == (char)'\0')
 		return (0);
 	char * str = calloc (2, sizeof(char));
 	str[0] = (char)arg;
-	i = 0;
-	if (oper.accuracy.count > 0)
-		i += accuracy_check_str(&str, oper);
 
-//	i += space_check(&str, oper, str);
+	i = 0;
 	if (oper.width.count > ft_strlen(str))
 		i += width_check_str(&str, oper);
-	//if (oper.accuracy.count != 0 || str != 0)
-//	i += print_line(&str);
+	if (oper.flag.is_zero)
+			str = flag_zero_str(str, oper.width.count - 1);
 	while (*(str + i))
 	{
 		if (write(1, str + i, 1) == -1)

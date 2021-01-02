@@ -137,7 +137,7 @@ void check_orig_str (char* arg, char **strs, int len)
 	}
 }
 
-void check_my_char (int arg, char *strs[], int len)
+void check_my_char (int arg, char **strs, int len)
 {
 
 	int j = 0;
@@ -166,7 +166,7 @@ void check_orig_char (int arg, char **strs, int len)
 	{
 		//	printf("\noriginal:\n");
 		printf("%s:\t", strs[j]);
-		int i = printf (strs[j], arg);
+		int i = printf (strs[j], (char)arg);
 		printf("\t return: %d\n", i);
 		j++;
 
@@ -205,7 +205,7 @@ int main(void)
 			 1, 10, 357, 9251112, 2147483647};
 	int a1[] = {-3};
 	char *check[] = {
-			"%", "%0","%-", "%5", "%0", "%12",
+			"%", "%0","%-", "%5", "%0", "%12", "%1",
 			"%.0", "%.3", "%.1", "%.12", "%0.0",
 			"%0.1", "%1.0", "%1.1",
 			"%-0", "%-0.0", "%-0.12", "%-12.0",
@@ -239,6 +239,7 @@ int main(void)
 	char *b1[] = {"!"};
 	char c [] = {'a', 'b', 'c', 'd', '\t', '%',
 			  '\n'};
+	char c1 [] = {'c'};
 	unsigned int d[] = {0, 10, 245, 2147483647, 2147483649, 4294967295,
 					 429496726, 4294967297};
 //	unsigned int a[a_len];
@@ -272,9 +273,9 @@ int main(void)
 	i = -1;
 	while (++i < b_len)
 		check_my_str(b[i], str_check, len_check);
-//	i = -1;
-//	while (++i < c_len)
-//		check_my_char(c[i], char_check, len_check);
+	i = -1;
+	while (++i < c_len)
+		check_my_char(c[i], char_check, len_check);
 //	i = -1;
 //	while (++i < d_len)
 //		check_un_my(d[i], un_check, len_check);
@@ -288,9 +289,9 @@ int main(void)
 	i = -1;
 	while (++i < b_len)
 		check_orig_str(b[i], str_check, len_check);
-////	i = -1;
-//	while (++i < c_len)
-//		check_orig_char(c[i], char_check, len_check);
+	i = -1;
+	while (++i < c_len)
+		check_orig_char(c[i], char_check, len_check);
 //	i = -1;
 //	while (++i < d_len)
 //		check_un_orig(d[i], un_check, len_check);
