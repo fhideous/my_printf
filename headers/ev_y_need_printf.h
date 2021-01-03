@@ -42,6 +42,7 @@ int		print_line(char** str);
 void	struct_set (s_operation *oper);
 void	check_flag(char **str, s_operation *oper);
 void	check_width(char** str, s_operation *oper);
+int		width_check_uint(char **str, s_operation oper);
 void	check_accuracy(char** str, s_operation *oper);
 void	check_oper(char** str, s_operation *oper);
 

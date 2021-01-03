@@ -205,7 +205,7 @@ int main(void)
 			 1, 10, 357, 9251112, 2147483647};
 	int a1[] = {-3};
 	char *check[] = {
-			"%", "%0","%-", "%5", "%0", "%12", "%1",
+			"%","%-", "%5", "%0", "%12", "%1",
 			"%.0", "%.3", "%.1", "%.12", "%0.0",
 			"%0.1", "%1.0", "%1.1",
 			"%-0", "%-0.0", "%-0.12", "%-12.0",
@@ -223,7 +223,7 @@ int main(void)
 			"%00.0", "%5.3", "%0.2", "%02", "%3.0", "%05.5"
 	};
 
-	char *check1[] = {"%05.9"};
+	char *check54[] = {"%1.0"};
 
 
 	int a_len = sizeof(a) / sizeof(a[0]);
@@ -241,8 +241,10 @@ int main(void)
 			  '\n'};
 	char c1 [] = {'c'};
 	unsigned int d[] = {0, 10, 245, 2147483647, 2147483649, 4294967295,
-					 429496726, 4294967297};
-//	unsigned int a[a_len];
+					 429496726, 4294967296};
+	unsigned int d1[] = {0};
+
+	//	unsigned int a[a_len];
 
 //	i = 0;
 //	while (i < a_len)
@@ -276,9 +278,9 @@ int main(void)
 	i = -1;
 	while (++i < c_len)
 		check_my_char(c[i], char_check, len_check);
-//	i = -1;
-//	while (++i < d_len)
-//		check_un_my(d[i], un_check, len_check);
+	i = -1;
+	while (++i < d_len)
+		check_un_my(d[i], un_check, len_check);
 
 
 /////////////			Original
@@ -292,9 +294,9 @@ int main(void)
 	i = -1;
 	while (++i < c_len)
 		check_orig_char(c[i], char_check, len_check);
-//	i = -1;
-//	while (++i < d_len)
-//		check_un_orig(d[i], un_check, len_check);
+	i = -1;
+	while (++i < d_len)
+		check_un_orig(d[i], un_check, len_check);
 }
 
 

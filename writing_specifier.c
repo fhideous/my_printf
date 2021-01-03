@@ -41,34 +41,16 @@ int add_minus (char** str, int arg, s_operation oper)
 	int n_len;
 
 	n_len = (int)ft_strlen(*str) - space_count(*str);
-//	if ((oper.flag.is_minus && oper.accuracy.count) && oper.width.count -
-//	oper.accuracy.count)
-//	{
-////		i = 0;
-////		while (!ft_isdigit(*(*str + i)))
-////			i++;
-//		if (!(tmp = ft_strjoin("-", *str)))
-//			return (-1);
-//		free(*str);
-//		*str = tmp;
-//	}else
 	if ((oper.flag.is_zero) && oper.width.count <= n_dig(arg))
 	{
-//		i = 0;
-//		while (!ft_isdigit(*(*str + i)))
-//			i++;
 		if (!(tmp = ft_strjoin("-", *str)))
 			return (-1);
-
 		free(*str);
 		*str = tmp;
 	} else
 	if (oper.accuracy.count >= ft_strlen(*str)/* || (oper.accuracy.is_zero &&
 	n_len == 1)*/)
 	{
-//		i = 0;
-//		while (!ft_isdigit(*(*str + i)))
-//			i++;
 		if (!(tmp = ft_strjoin("-", *str)))
 			return (-1);
 		free(*str);
@@ -121,8 +103,6 @@ int int_arg(int arg, s_operation oper)
 		str = ft_strjoin("", "-2147483648");
 	else
 		str = ft_itoa(arg > 0 ? arg : -arg);
-//	if (oper.flag.is_minus)
-//		oper.flag.is_zero = 0;
 	if (*str == '0' && oper.accuracy.is_zero)
 	{
 		if (oper.width.count == 0)
@@ -200,20 +180,18 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 {
 	char *str;
 	int i;
-//	char *tmp;
 
 	i = 0;
 	str = ft_utoa(arg);
-	//if (oper.flag.is_plus)
-//		i += plus_flag(arg);
-	if (*str == '0' && oper.accuracy.is_zero)
+	if (*str == '0' && !oper.width.count && oper.accuracy.is_zero)
 		return (0);
 	if (oper.accuracy.count > 0)
 		i += accuracy_check(&str, oper);
-	if (oper.width.count > ft_strlen(str))
-		i += width_check(&str, oper);
+	if (oper.width.count >= ft_strlen(str))
+		i += width_check_uint(&str, oper);
 	i += print_line(&str);
-	//free (str);   ////// Need to clear this shit
+	if (*str)			///// Wow, something interesting
+		free (str);   ////// Need to clear this shit
+	str = NULL;
 	return (i);
-
 }
