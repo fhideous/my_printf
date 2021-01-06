@@ -27,7 +27,7 @@ typedef struct t_operation
 	}accuracy;
 }				s_operation;
 
-unsigned int		n_dig(int a);
+unsigned int		n_dig(unsigned int a);
 void set_minus(char **str);
 //unsigned int dectox_int(int a, char *s);
 int		write_str(char *str);
@@ -52,6 +52,7 @@ int		int_arg(int arg, s_operation oper);
 int		str_arg(char *str, s_operation oper);
 int		char_arg(int arg, s_operation oper);
 int		unsigned_arg (unsigned int arg, s_operation oper);
+int		ptr_arg (unsigned long int arg, s_operation oper);
 
 int		plus_flag(int integer);
 char	*flag_zero_str(char *str, int len);

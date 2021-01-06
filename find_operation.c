@@ -69,22 +69,37 @@ void check_width(char** str, s_operation *oper)
 }
 // за точкой должно быть целое число, если указана только(.), то точность ==
 
+static int ft_is_spec(char ch)
+{
+	if (ch == 'd' || ch == 'i'
+	|| ch == 's' || ch == 'c'
+	|| ch == 'u' || ch == 'p'
+	|| ch == 'x' || ch == 'X')
+		return (1);
+	return (0);
+}
 // если указана точность, 0 не учитывается
+// при отриц точности - ничего
+// при не сказанной точности - точность = 0
 void check_accuracy(char** str, s_operation *oper)
 {
-	//// !!!!!!!!
-	///если отрицательна, то устанавливать в -1!!!
+	int skip;
+
 	(*str)++;
-	if (ft_isdigit (**str) && **str != '0')
+	skip = 0;
+	if (ft_isdigit (**str) && **str != '0' )
 	{
 		oper->accuracy.count = ft_atoi(*str);
 //		oper->flag.is_zero = 0;
 	}
 	else if (**str == '*')
 		oper->accuracy.is_argument = 1;
-	else
+	else if (**str == '0' || ft_is_spec(**str))
 		oper->accuracy.is_zero = 1;
-	*str += (n_dig(oper->accuracy.count) + oper->accuracy.is_argument);
+	if (**str == '-')
+		skip = ft_atoi(*str);
+
+	*str += (n_dig(oper->accuracy.count) + oper->accuracy.is_argument + skip);
 }
 // если спецификатор отличен от тех, что чуществует - ub
 // если аргументов недостаточно - ub

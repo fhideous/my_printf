@@ -195,3 +195,55 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	str = NULL;
 	return (i);
 }
+
+char	check_hex (unsigned int n)
+{
+	if (n >= 0 && n <= 9)
+		return ((char)(n + 48));
+	if (n == 10)
+		return ('a');
+	if (n == 11)
+		return ('b');
+	if (n == 12)
+		return ('c');
+	if (n == 13)
+		return ('d');
+	if (n == 14)
+		return ('e');
+	if (n == 15)
+		return ('f');
+}
+
+
+int		ptr_arg (unsigned long int arg, s_operation oper)
+{
+	char	*str;
+	int		i;
+	unsigned int 	len;
+	unsigned int	rem;
+	char			*tmp;
+
+	len = n_dig(arg) + 1;
+	i = len;
+	str = calloc ((len), sizeof(char));
+	while (arg || arg / 16  )
+	{
+		rem = arg % 16;
+		arg /= 16;
+		str[--i] = check_hex(rem);
+	}
+	i = 0;
+	while (!ft_isalnum(str[i]) && i < len)
+		str[i++] = '*';
+	if (!(tmp = ft_substr(str, i, len - i)))
+		return (-1);
+	free (str);
+	str = ft_strjoin("0x", tmp);
+
+	width_check_str(&str, oper);
+	i = 0;
+	i += print_line(&str);
+	free(tmp);
+	//free(str);
+	return (i);
+}

@@ -14,6 +14,9 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 		n = char_arg(va_arg(*ap, int), oper);
 	if (**str == 'u')
 		n = unsigned_arg(va_arg(*ap, unsigned int), oper);
+	if (**str == 'p')
+		n = ptr_arg((unsigned long int)va_arg(*ap, void *), oper);
+
 //	if (**str == 'x' || **str== 'X')
 //		n = x_arg(va_arg(*ap, unsigned int));
 	if(n != -1)
@@ -53,6 +56,7 @@ int ft_printf(const char *src_str, ...)
 			struct_set(&operation);
 			check_oper(&str, &operation);
 			check_star(&operation, &ap);
+		//	ptr_arg(398313224, operation);
 			if (specifier_processing(&ap, &str, operation, &count) == -1)
 				return (-1);
 //			print_oper(operation);
