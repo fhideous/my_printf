@@ -113,7 +113,7 @@ int		width_check_str(char** str, s_operation oper)
 			same_symb_l = ft_memmove(same_symb_l + oper.width.count -
 									 str_len, *str, str_len) -
 						  oper.width.count + str_len;
-		free(*str);
+//		free(*str);
 		*str = same_symb_l;
 	}
 	return (0);

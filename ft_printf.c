@@ -16,9 +16,10 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 		n = unsigned_arg(va_arg(*ap, unsigned int), oper);
 	if (**str == 'p')
 		n = ptr_arg((unsigned long int)va_arg(*ap, void *), oper);
-
-//	if (**str == 'x' || **str== 'X')
-//		n = x_arg(va_arg(*ap, unsigned int));
+	if (**str == 'x')
+		n = hex_arg(va_arg(*ap, unsigned long int),oper, 1);
+	if (**str == 'X')
+		n = hex_arg(va_arg(*ap, unsigned long int ),oper, 0);
 	if(n != -1)
 		*count += n;
 	else

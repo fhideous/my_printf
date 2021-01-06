@@ -275,6 +275,7 @@ int main(void)
 	char **char_check = line_for_check(check, 'c', len_check);
 	char **un_check = line_for_check(check, 'u', len_check);
 	char **ptr_check = line_for_check(check, 'p', len_check);
+	char **hex_check = line_for_check(check, 'x', len_check);
 //
 	char *b[] = {"He", ",", "Hello ", "world ", "Hello world", "", " ", "!"};
 	char *b1[] = {"!"};
@@ -286,6 +287,7 @@ int main(void)
 	unsigned int d1[] = {0};
 
 	unsigned int e[] = {&d[0], &a[0], &c[0], &b[4] };
+
 
 	int b_len = sizeof(b) / sizeof(b[0]);
 	int c_len = sizeof (c) / sizeof(c[0]);
@@ -311,9 +313,12 @@ printf ("%.16p", &a);
 //	i = -1;
 //	while (++i < d_len)
 //		check_un_my(d[i], un_check, len_check);
+//	i = -1;
+//	while (++i < e_len)
+//		check_my_ptr(e[i], ptr_check, len_check);
 	i = -1;
-	while (++i < e_len)
-		check_my_ptr(e[i], ptr_check, len_check);
+	while (++i < d_len)
+		check_un_my(d[i], hex_check, len_check);
 
 ///////////////			Original
 
@@ -329,7 +334,11 @@ printf ("%.16p", &a);
 //	i = -1;
 //	while (++i < d_len)
 //		check_un_orig(d[i], un_check, len_check);
+//	i = -1;
+//	while (++i < e_len)
+//		check_orig_ptr(e[i], ptr_check, len_check);
 	i = -1;
-	while (++i < e_len)
-		check_orig_ptr(e[i], ptr_check, len_check);
+	while (++i < d_len)
+		check_un_orig(d[i], hex_check, len_check);
+
 }

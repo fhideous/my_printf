@@ -196,7 +196,7 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	return (i);
 }
 
-char	check_hex (unsigned int n)
+static char	check_hex_low (unsigned int n)
 {
 	if (n >= 0 && n <= 9)
 		return ((char)(n + 48));
@@ -212,6 +212,24 @@ char	check_hex (unsigned int n)
 		return ('e');
 	if (n == 15)
 		return ('f');
+}
+
+static char	check_hex_high (unsigned int n)
+{
+	if (n >= 0 && n <= 9)
+		return ((char)(n + 48));
+	if (n == 10)
+		return ('A');
+	if (n == 11)
+		return ('B');
+	if (n == 12)
+		return ('C');
+	if (n == 13)
+		return ('D');
+	if (n == 14)
+		return ('E');
+	if (n == 15)
+		return ('F');
 }
 
 
@@ -230,7 +248,7 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	{
 		rem = arg % 16;
 		arg /= 16;
-		str[--i] = check_hex(rem);
+		str[--i] = check_hex_low(rem);
 	}
 	i = 0;
 	while (!ft_isalnum(str[i]) && i < len)
@@ -245,5 +263,41 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	i += print_line(&str);
 	free(tmp);
 	//free(str);
+	return (i);
+}
+
+int		hex_arg (unsigned long int arg, s_operation oper, int is_low)
+{
+	char	*str;
+	int		i;
+	unsigned int 	len;
+	unsigned int	rem;
+	char			*tmp;
+
+	len = n_dig(arg) + 1;
+	i = len;
+	str = calloc ((len), sizeof(char));
+	while (arg || arg / 16  )
+	{
+		rem = arg % 16;
+		arg /= 16;
+		if (is_low)
+			str[--i] = check_hex_low(rem);
+		else
+			str[--i] = check_hex_high(rem);
+	}
+	i = 0;
+	while (!ft_isalnum(str[i]) && i < len)
+		str[i++] = '*';
+	if (!(tmp = ft_substr(str, i, len - i)))
+		return (-1);
+	free (str);
+	str = tmp;
+	width_check_str(&str, oper);
+	if (oper.accuracy.count + oper.flag.is_zero > ft_strlen (str))
+		accuracy_check(&str, oper);
+	i = 0;
+	i += print_line(&str);
+
 	return (i);
 }
