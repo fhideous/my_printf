@@ -28,15 +28,41 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	return (0);
 }
 
-void check_star (s_operation *oper, va_list *ap)
+//void	check_star (s_operation *oper, va_list *ap)
+//{
+//	if (oper->width.is_argument)
+//		oper->width.count = va_arg(*ap,unsigned int);
+//	if (oper->accuracy.is_argument)
+//		oper->accuracy.count = va_arg(*ap,unsigned int);
+//}
+
+char*	check_star (const char * str, va_list *ap)
 {
-	if (oper->width.is_argument)
-		oper->width.count = va_arg(*ap,unsigned int);
-	if (oper->accuracy.is_argument)
-		oper->accuracy.count = va_arg(*ap,unsigned int);
+	int i;
+	char *res;
+	char *tmp;
+	char *tmp2;
+
+	i = 0;
+	while (*(str + i) != '*' && !ft_is_spec((str[i])))
+		i++;
+	res = ft_strjoin("", str);
+	if (*(str + i) != '*')
+		return (res);
+	res += i + 1;
+	i = va_arg(*ap, int);
+	tmp = ft_itoa(i);
+	if (!(tmp2 = ft_strjoin(tmp, res)))
+		return (NULL);
+	free(res -= 2);
+	free(tmp);
+	if (!(res = ft_strjoin("%",tmp2)))
+		return (NULL);
+	free(tmp2);
+	return (res);
 }
 
-int ft_printf(const char *src_str, ...)
+int		ft_printf(const char *src_str, ...)
 {
 	va_list ap;
 	int count;
@@ -54,15 +80,16 @@ int ft_printf(const char *src_str, ...)
 			return (count);
 		if (*str == '%')
 		{
+			str = check_star(str, &ap);
 			struct_set(&operation);
 			check_oper(&str, &operation);
-			check_star(&operation, &ap);
 		//	ptr_arg(398313224, operation);
 			if (specifier_processing(&ap, &str, operation, &count) == -1)
 				return (-1);
 //			print_oper(operation);
 		}
 	}
+	free((void *)src_str);
 	va_end(ap);
 	return (count);
 }

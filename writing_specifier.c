@@ -91,7 +91,7 @@ int add_minus (char** str, int arg, s_operation oper)
 	return (1);
 }
 
-int int_arg(int arg, s_operation oper)
+int int_arg(long int arg, s_operation oper)
 {
 	char *str;
 	int i;
@@ -99,10 +99,10 @@ int int_arg(int arg, s_operation oper)
 	i = 0;
 	if (oper.accuracy.count || oper.accuracy.is_zero)
 		oper.flag.is_zero = 0;
-	if (arg == -2147483648)
-		str = ft_strjoin("", "-2147483648");
-	else
-		str = ft_itoa(arg > 0 ? arg : -arg);
+//	if (arg == -2147483648)
+//		str = ft_strjoin("", "-2147483648");
+//	else
+		str = ft_ltoa(arg > 0 ? arg : -arg);
 	if (*str == '0' && oper.accuracy.is_zero)
 	{
 		if (oper.width.count == 0)
@@ -116,7 +116,7 @@ int int_arg(int arg, s_operation oper)
 	if (oper.width.count > ft_strlen(str))
 		i += width_check(&str, oper);
 	if (arg < 0)
-		add_minus(&str, arg, oper);
+		add_minus(&str, -1 * arg, oper);
 	i += print_line(&str);
 	//free (str);   ////// Need to clear this shit
 	return (i);
@@ -126,7 +126,7 @@ int str_arg(char *arg, s_operation oper)
 {
 	int i;
 	char * str = ft_strjoin(arg, "");
-	int arg_len;
+	unsigned int arg_len;
 
 	arg_len = ft_strlen(arg);
 	i = 0;
@@ -212,6 +212,7 @@ static char	check_hex_low (unsigned int n)
 		return ('e');
 	if (n == 15)
 		return ('f');
+	return (-1);
 }
 
 static char	check_hex_high (unsigned int n)
@@ -230,13 +231,14 @@ static char	check_hex_high (unsigned int n)
 		return ('E');
 	if (n == 15)
 		return ('F');
+	return (-1);
 }
 
 
 int		ptr_arg (unsigned long int arg, s_operation oper)
 {
 	char	*str;
-	int		i;
+	unsigned int		i;
 	unsigned int 	len;
 	unsigned int	rem;
 	char			*tmp;
@@ -269,7 +271,7 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 int		hex_arg (unsigned long int arg, s_operation oper, int is_low)
 {
 	char	*str;
-	int		i;
+	unsigned int		i;
 	unsigned int 	len;
 	unsigned int	rem;
 	char			*tmp;

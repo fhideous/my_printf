@@ -242,11 +242,11 @@ int main(void)
 	int i;
 //	i = 0;
 	//int j[] = {-123456, -99, -10, -1, 0, 1, 10, 99, 123456};
-	int a[] = {-214748368, -9876543, -357, -10, -1, 0,
-			 1, 10, 357, 9251112, 2147483647};
+	int a[] = {8, -2147483648, -9876543, -357, -10, -1, 0,
+			 1, 10, 357, 9251112, 2147483647, -16};
 	int a1[] = {-3};
-	char *check[] = {
-			"%","%-", "%5", "%0", "%12", "%1",
+	char *check[] = { "%0.",
+			"%","%-", "%-4",  "%5", "%0", "%12", "%1",
 			"%.0", "%.3", "%.1", "%.12", "%0.0",
 			"%0.1", "%1.0", "%1.1",
 			"%-0", "%-0.0", "%-0.12", "%-12.0",
@@ -262,7 +262,7 @@ int main(void)
 			"%-.0", "%-0.0" ,  "%05.9", "%09.5",
 			"%-05.9", "%5.3", "%-5.3", "%-09.5", "%-9.5", "%-05.9",
 			"%00.0", "%5.3", "%0.2", "%02", "%3.0", "%05.5", "%0.10", "%.10",
-			"%240.2", "%-42.2", "%4.240",
+			"%240.2", "%-42.2", "%4.240", "%0.", "%5.", "%12."
 
 	};
 	char *check54[] = {"%1.0"};
@@ -294,20 +294,20 @@ int main(void)
 	int d_len = sizeof (d) / sizeof(d[0]);
 	int e_len = sizeof (e) / sizeof(e[0]);
 
-
+//int	n = -4;
+//	i = 8;
+//printf ("|%*i|\n", n, i);
+//ft_printf ("|%*i|\n", n, i);
 //////////////				MY
-//
-//	printf("%p", &i);
-printf ("%.16p", &a);
-//
-//	i = -1;
-//	while (++i < a_len)
-//		check_my(a[i], int_check, len_check);
-//
-//	i = -1;
+
+	i = -1;
+	while (++i < a_len)
+		check_my(a[i], int_check, len_check);
+
+	i = -1;
 //	while (++i < b_len)
 //		check_my_str(b[i], str_check, len_check);
-//	i = -1;
+	i = -1;
 //	while (++i < c_len)
 //		check_my_char(c[i], char_check, len_check);
 //	i = -1;
@@ -316,15 +316,15 @@ printf ("%.16p", &a);
 //	i = -1;
 //	while (++i < e_len)
 //		check_my_ptr(e[i], ptr_check, len_check);
-	i = -1;
-	while (++i < d_len)
-		check_un_my(d[i], hex_check, len_check);
+//	i = -1;
+//	while (++i < d_len)
+//		check_un_my(d[i], hex_check, len_check);
 
 ///////////////			Original
 
-//	i = -1;
-//	while (++i < a_len)
-//		check_orig(a[i], int_check, len_check);
+	i = -1;
+	while (++i < a_len)
+		check_orig(a[i], int_check, len_check);
 //	i = -1;
 //	while (++i < b_len)
 //		check_orig_str(b[i], str_check, len_check);
@@ -337,8 +337,8 @@ printf ("%.16p", &a);
 //	i = -1;
 //	while (++i < e_len)
 //		check_orig_ptr(e[i], ptr_check, len_check);
-	i = -1;
-	while (++i < d_len)
-		check_un_orig(d[i], hex_check, len_check);
+//	i = -1;
+//	while (++i < d_len)
+//		check_un_orig(d[i], hex_check, len_check);
 
 }

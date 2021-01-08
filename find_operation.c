@@ -19,7 +19,7 @@ void struct_set (s_operation *oper)
 
 void check_flag(char **str, s_operation *oper)
 {
-	if (*(++*str) == '-')
+	if (*(*str += 1) == '-')
 	{
 		oper->flag.is_minus = 1;
 		oper->flag.is_zero = 0;
@@ -46,6 +46,7 @@ void check_flag(char **str, s_operation *oper)
 		oper->flag.is_lattice = 1;
 		check_flag(&*str, *&oper);
 	}
+
 }
 
 // числа всегда положительные
@@ -69,7 +70,7 @@ void check_width(char** str, s_operation *oper)
 }
 // за точкой должно быть целое число, если указана только(.), то точность ==
 
-static int ft_is_spec(char ch)
+int ft_is_spec(char ch)
 {
 	if (ch == 'd' || ch == 'i'
 	|| ch == 's' || ch == 'c'
@@ -96,10 +97,9 @@ void check_accuracy(char** str, s_operation *oper)
 		oper->accuracy.is_argument = 1;
 	else if (**str == '0' || ft_is_spec(**str))
 		oper->accuracy.is_zero = 1;
-	if (**str == '-')
-		skip = ft_atoi(*str);
-
-	*str += (n_dig(oper->accuracy.count) + oper->accuracy.is_argument + skip);
+	while (!ft_isalpha(*(*str + skip)))
+		skip++;
+	*str += (oper->accuracy.is_argument + skip);
 }
 // если спецификатор отличен от тех, что чуществует - ub
 // если аргументов недостаточно - ub
