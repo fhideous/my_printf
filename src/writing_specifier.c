@@ -1,7 +1,7 @@
-#include "headers/ev_y_need_printf.h"
+#include "../headers/ev_y_need_printf.h"
 
 
-//#include "headers/libft.h"
+//#include "headers/libft_a.h"
 
 void			*f_memmove(void *dst, const void *src, size_t len)
 {
@@ -102,7 +102,7 @@ int int_arg(long int arg, s_operation oper)
 //	if (arg == -2147483648)
 //		str = ft_strjoin("", "-2147483648");
 //	else
-		str = ft_ltoa(arg > 0 ? arg : -arg);
+		str = ft_itoa(arg > 0 ? arg : -arg);				////change to ltoa
 	if (*str == '0' && oper.accuracy.is_zero)
 	{
 		if (oper.width.count == 0)
@@ -125,10 +125,14 @@ int int_arg(long int arg, s_operation oper)
 int str_arg(char *arg, s_operation oper)
 {
 	int i;
-	char * str = ft_strjoin(arg, "");
+	char * str;
 	unsigned int arg_len;
 
-	arg_len = ft_strlen(arg);
+	if (!arg)
+		str = ft_strjoin("(null)", "");
+	else
+		str = ft_strjoin(arg, "");
+	arg_len = ft_strlen(str);
 	i = 0;
 	if (oper.accuracy.count > 0 || oper.accuracy.is_zero)
 		i += accuracy_check_str(&str, oper);
@@ -156,22 +160,21 @@ int str_arg(char *arg, s_operation oper)
 int char_arg(int arg, s_operation oper)
 {
 	int i;
-	if (arg == (char)'\0')
+	if (arg == (char)'\0' && !oper.width.count)
 		return (0);
-	char * str = calloc (2, sizeof(char));
+	char * str = ft_calloc (2, sizeof(char));
 	str[0] = (char)arg;
 
-	i = 0;
+	i = -1;
+	if (arg == '\0')
+		i = 0;
 	if (oper.width.count > ft_strlen(str))
 		i += width_check_str(&str, oper);
 	if (oper.flag.is_zero)
 			str = flag_zero_str(str, oper.width.count - 1);
-	while (*(str + i))
-	{
+	while (*(str + ++i))
 		if (write(1, str + i, 1) == -1)
 			return (-1);
-		i++;
-	}
 	free(str);
 	return (i);
 }
@@ -182,7 +185,8 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	int i;
 
 	i = 0;
-	str = ft_utoa(arg);
+	str = ft_itoa(arg);
+//	str = ft_utoa(arg);   // не подтягивается
 	if (*str == '0' && !oper.width.count && oper.accuracy.is_zero)
 		return (0);
 	if (oper.accuracy.count > 0)
@@ -196,7 +200,7 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	return (i);
 }
 
-static char	check_hex_low (unsigned int n)
+static char	check_hex_low (int n)
 {
 	if (n >= 0 && n <= 9)
 		return ((char)(n + 48));
@@ -215,7 +219,7 @@ static char	check_hex_low (unsigned int n)
 	return (-1);
 }
 
-static char	check_hex_high (unsigned int n)
+static char	check_hex_high (int n)
 {
 	if (n >= 0 && n <= 9)
 		return ((char)(n + 48));

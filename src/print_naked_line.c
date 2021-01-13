@@ -1,4 +1,4 @@
-#include "headers/ev_y_need_printf.h"
+#include "../headers/ev_y_need_printf.h"
 #include "stdio.h"
 
 void print_oper (s_operation oper)

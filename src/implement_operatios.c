@@ -1,4 +1,4 @@
-#include "headers/ev_y_need_printf.h"
+#include "../headers/ev_y_need_printf.h"
 
 char	*line_from_same_asymb(int symb, int len)
 {
@@ -164,10 +164,10 @@ int		accuracy_check(char **str, s_operation oper)
 int		accuracy_check_str(char **str, s_operation oper)
 {
 	int		diff_w_str;
-	int		diff_a_w;
+//	int		diff_a_w;
 
 	diff_w_str = ft_strlen(*str) - oper.accuracy.count;
-	diff_a_w = oper.accuracy.count - oper.width.count;
+//	diff_a_w = oper.accuracy.count - oper.width.count;
 
 	if (diff_w_str > 0)
 		*(*str + oper.accuracy.count) = '\0';

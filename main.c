@@ -294,15 +294,91 @@ int main(void)
 	int d_len = sizeof (d) / sizeof(d[0]);
 	int e_len = sizeof (e) / sizeof(e[0]);
 
-//int	n = -4;
+
+	int g = -245;
+	int l = 245;
+	char *str = "hello";
+
+	static char *s_hidden = "hi low\0don't print me lol\0";
+
+	printf("hello %s\n", "gavin");
+	ft_printf("hello %s\n", "gavin");
+	printf ("\n");
+
+
+	printf("%*s.\n", 32,"abc");
+	ft_printf("%*s.\n", 32,"abc");
+	printf ("\n");
+
+
+	printf("%5c.\n", '\x01');
+	ft_printf("%5c.\n",'\x01');
+	printf ("\n");
+
+	printf("%5c.\n", '\0');
+	ft_printf("%5c.\n",'\0');
+	printf ("\n");
+
+	printf("%3.1s.\n", NULL);
+	ft_printf("%3.1s.\n", NULL);
+	printf ("\n");
+
+	printf("%.03s.\n", NULL);
+	ft_printf("%.03s.\n", NULL);
+	printf ("\n");
+
+	printf("|%.20s.|\n", NULL);
+	ft_printf("|%.20s.|\n", NULL);
+	printf ("\n");
+
+	printf("|%.7s|\n", str);
+	ft_printf("|%.7s|\n", str);
+	printf ("\n");
+
+	printf("|%.*d|\n", -3, 12345);
+	ft_printf("|%.*d|\n", -3, 12345);
+	printf ("\n");
+
+	printf("|%4.12i|\n", g);
+	ft_printf("|%4.12i|\n", g);
+	printf ("\n");
+
+	"%.7s",
+	printf("|%.12i|\n", g);
+	ft_printf("|%.12i|\n", g);
+	printf ("\n");
+
+	printf("|%14.12i|\n", g);
+	ft_printf("|%14.12i|\n", g);
+	printf ("\n");
+
+	printf("|%.i|\n", g);
+	ft_printf("|%.i|\n", g);
+	printf ("\n");
+
+	printf("|%4.2i|\n", g);
+	ft_printf("|%4.2i|\n", g);
+	printf ("\n");
+
+	printf("|%14.2i|\n", g);
+	ft_printf("|%14.2i|\n", g);
+	printf ("\n");
+
+	printf("|%4.12i|\n", g);
+	ft_printf("|%4.12i|\n", g);
+	printf ("\n");
+
+
+
+	//int	n = -4;
 //	i = 8;
 //printf ("|%*i|\n", n, i);
 //ft_printf ("|%*i|\n", n, i);
 //////////////				MY
-
-	i = -1;
-	while (++i < a_len)
-		check_my(a[i], int_check, len_check);
+//
+//	i = -1;
+//	while (++i < a_len)
+//		check_my(a[i], int_check, len_check);
 
 	i = -1;
 //	while (++i < b_len)
@@ -322,10 +398,10 @@ int main(void)
 
 ///////////////			Original
 
-	i = -1;
-	while (++i < a_len)
-		check_orig(a[i], int_check, len_check);
 //	i = -1;
+//	while (++i < a_len)
+//		check_orig(a[i], int_check, len_check);
+////	i = -1;
 //	while (++i < b_len)
 //		check_orig_str(b[i], str_check, len_check);
 //	i = -1;

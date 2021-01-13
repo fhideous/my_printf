@@ -1,4 +1,4 @@
-#include "headers/ev_y_need_printf.h"
+#include "../headers/ev_y_need_printf.h"
 
 // 0 Работает только с d i o u x X a A e E f F g G
 // если есть + , пробел игнорируется
@@ -88,14 +88,16 @@ void check_accuracy(char** str, s_operation *oper)
 
 	(*str)++;
 	skip = 0;
-	if (ft_isdigit (**str) && **str != '0' )
+	while (**str == '0')
+		(*str)++;
+	if (ft_isdigit (**str))
 	{
 		oper->accuracy.count = ft_atoi(*str);
 //		oper->flag.is_zero = 0;
 	}
 	else if (**str == '*')
 		oper->accuracy.is_argument = 1;
-	else if (**str == '0' || ft_is_spec(**str))
+	else if (ft_is_spec(**str))
 		oper->accuracy.is_zero = 1;
 	while (!ft_isalpha(*(*str + skip)))
 		skip++;

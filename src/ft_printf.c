@@ -1,9 +1,10 @@
-#include "headers/ft_printf.h"
+#include "../headers/ft_printf.h"
 
 int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 {
 	int n;
 
+	n = -1;
 	if (**str == '%')
 		(++*str);
 	if (**str == 'd' || **str == 'i')
@@ -43,6 +44,8 @@ char*	check_star (const char * str, va_list *ap)
 	char *tmp;
 	char *tmp2;
 
+	i = va_arg(*ap, int);
+	tmp = ft_itoa(i);
 	i = 0;
 	while (*(str + i) != '*' && !ft_is_spec((str[i])))
 		i++;
@@ -50,11 +53,10 @@ char*	check_star (const char * str, va_list *ap)
 	if (*(str + i) != '*')
 		return (res);
 	res += i + 1;
-	i = va_arg(*ap, int);
-	tmp = ft_itoa(i);
 	if (!(tmp2 = ft_strjoin(tmp, res)))
 		return (NULL);
-	free(res -= 2);
+	res -= (i + 1);
+	free(res);
 	free(tmp);
 	if (!(res = ft_strjoin("%",tmp2)))
 		return (NULL);
@@ -89,7 +91,7 @@ int		ft_printf(const char *src_str, ...)
 //			print_oper(operation);
 		}
 	}
-	free((void *)src_str);
+//t	free((void *)src_str);
 	va_end(ap);
 	return (count);
 }

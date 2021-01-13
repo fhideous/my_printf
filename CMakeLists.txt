@@ -7,12 +7,13 @@ set(CMAKE_C_STANDARD 99)
 ##        )
 
 #указывается полный путь до статической библиотеки
-set(SOURCE_DIR /Users/fhideous/Desktop/fhideous/ft_printf_git2.0/git/libft/libft.a)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+set(SOURCE_DIR /home/fhideous/CLionProjects/my_printf/libft/libft.a)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
-set(SOURCES main.c git/ft_printf.c git/print_naked_line.c git/find_operation.c
-        git/writing_specifier.c git/some_common_fun.c git/implement_operators.c)
-set(HEADERS git/headers/libft.h git/headers/ev_y_need_printf.h git/headers/ft_printf.h)
+set(SOURCES main.c src/ft_printf.c src/print_naked_line.c src/find_operation.c
+        src/writing_specifier.c src/some_common_fun.c src/implement_operatios.c)
+
+set(HEADERS headers/libft.h headers/ev_y_need_printf.h headers/ft_printf.h)
 
 ##add_library(my_libft STATIC ${LIBFT_FILES})
 add_executable(ft_printf_git2.0 ${SOURCES} ${HEADERS})
