@@ -6,7 +6,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 LIBFT	=	libft
 
-HDRS	=	includes
+HDRS	=	headers
 
 SRCS	:=	$(wildcard	src/*.c)
 
@@ -16,7 +16,7 @@ RM		=	rm -f
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(HDRS)
 		make -C $(LIBFT)
 		cp libft/libft.a ./$(NAME)
 		ar	rcs	$(NAME)	$(OBJS)

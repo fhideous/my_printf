@@ -4,8 +4,6 @@
 
 #include "ev_y_need_printf.h"
 
-#include <stdarg.h>
-
 
 int ft_printf(const char *src_str, ...);
 

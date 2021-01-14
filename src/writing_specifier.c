@@ -185,8 +185,8 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	int i;
 
 	i = 0;
-	str = ft_itoa(arg);
-//	str = ft_utoa(arg);   // не подтягивается
+//	str = ft_itoa(arg);
+	str = ft_utoa(arg);   // не подтягивается
 	if (*str == '0' && !oper.width.count && oper.accuracy.is_zero)
 		return (0);
 	if (oper.accuracy.count > 0)
@@ -238,7 +238,6 @@ static char	check_hex_high (int n)
 	return (-1);
 }
 
-
 int		ptr_arg (unsigned long int arg, s_operation oper)
 {
 	char	*str;
@@ -247,9 +246,9 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	unsigned int	rem;
 	char			*tmp;
 
-	len = n_dig(arg) + 1;
+	len = un_dig(arg) + 1;
 	i = len;
-	str = calloc ((len), sizeof(char));
+	str = ft_calloc ((len), sizeof(char));
 	while (arg || arg / 16  )
 	{
 		rem = arg % 16;

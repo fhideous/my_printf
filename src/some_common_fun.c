@@ -1,9 +1,16 @@
 #include "../headers/ev_y_need_printf.h"
 
-unsigned int n_dig(unsigned int a)
+unsigned int	n_dig(unsigned int a)
 {
 	if(a/10 != 0)
 		return (1 + n_dig(a/10));
+	return (1);
+}
+
+unsigned long int	un_dig(unsigned long int a)
+{
+	if(a/10 != 0)
+		return (1 + un_dig(a/10));
 	return (1);
 }
 

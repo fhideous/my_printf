@@ -301,6 +301,62 @@ int main(void)
 
 	static char *s_hidden = "hi low\0don't print me lol\0";
 
+	int r00 = 0;
+
+
+
+	printf("%*s\n", -32, "abc");
+	ft_printf("%*s\n", -32, "abc");
+	printf ("\n");
+
+	printf("%.*s\n", -3, "hello");
+	ft_printf("%.*s\n", -3, "hello");
+	printf ("\n");
+
+	printf("%-*.*s\n", 7, 3, "yolo");
+	ft_printf("%-*.*s\n", 7, 3, "yolo");
+	printf ("\n");
+
+	printf("%.*s\n", 3, "hello");
+	ft_printf("%.*s\n", 3, "hello");
+	printf ("\n");
+
+	printf("|%c\n", -0);
+	ft_printf("|%c\n", -0);
+	printf ("\n");
+
+	printf("|%c\n", 0);
+	ft_printf("|%c\n", 0);
+	printf ("\n");
+
+	printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
+	ft_printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
+	printf ("\n");
+
+	printf("|%-10s|\n", "HELLO!");
+	ft_printf("|%-10s|\n", "HELLO!");
+	printf ("\n");
+
+	printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+	ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+	printf ("\n");
+
+	printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
+	ft_printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
+	printf ("\n");
+
+	printf("|%c|\n", '\n');
+	ft_printf("|%c|\n", '\n');
+	printf ("\n");
+
+	printf("%u\n", 4294967295u);
+	ft_printf("%u\n", 4294967295u);
+	printf ("\n");
+
+	printf("|%4.12i|\n", g);
+	ft_printf("|%4.12i|\n", g, 23);
+	printf ("\n");
+
 	printf("hello %s\n", "gavin");
 	ft_printf("hello %s\n", "gavin");
 	printf ("\n");

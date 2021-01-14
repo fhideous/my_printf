@@ -37,31 +37,67 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 //		oper->accuracy.count = va_arg(*ap,unsigned int);
 //}
 
-char*	check_star (const char * str, va_list *ap)
+//char*	check_star (const char * str, va_list *ap, s_operation *op)
+//{
+//	int i;
+//	int arg;
+//	char *res;
+//	char *tmp;
+//	char *tmp2;
+//	char *free_me;
+//
+//	i = 0;
+//	while (*(str + i) != '*' && !ft_is_spec((str[i])))
+//		i++;
+//	res = ft_strjoin("", str);
+//	if (*(str + i) != '*')
+//		return (res);
+//	free_me = res;
+//	check_flag(&res, op);
+//	free_me += i + 1;
+//	arg = va_arg(*ap, int);
+//	tmp = ft_itoa(arg);
+//	if (!(tmp2 = ft_strjoin(tmp, free_me)))
+//		return (NULL);
+//	free_me -= (i + 1);
+//	free(free_me);
+//	free(tmp);
+//	if (!(res = ft_strjoin("%",tmp2)))
+//		return (NULL);
+//	free(tmp2);
+//	return (res);
+//}
+
+int		check_star (const char * str,  va_list *ap, s_operation *op)
 {
 	int i;
-	char *res;
-	char *tmp;
-	char *tmp2;
 
-	i = va_arg(*ap, int);
-	tmp = ft_itoa(i);
 	i = 0;
 	while (*(str + i) != '*' && !ft_is_spec((str[i])))
 		i++;
-	res = ft_strjoin("", str);
 	if (*(str + i) != '*')
-		return (res);
-	res += i + 1;
-	if (!(tmp2 = ft_strjoin(tmp, res)))
-		return (NULL);
-	res -= (i + 1);
-	free(res);
-	free(tmp);
-	if (!(res = ft_strjoin("%",tmp2)))
-		return (NULL);
-	free(tmp2);
-	return (res);
+		return (1);
+
+	if (*(str + i + 1) == '.' || (ft_isalpha(*(str + i + 1)) && *(str + i - 1) != '.'))
+	{
+		op->width.count = va_arg(*ap, int);
+		if (op->width.count < 0)
+		{
+			op->width.count *= -1;
+			op->flag.is_minus = 1;
+		}
+	}
+	if (*(str + i - 1) != '.' )
+		while (*(str + ++i) != '*' && !ft_isalpha((str[i])));
+	if (*(str + i) == '*' && *(str + i - 1) == '.')
+	{
+		op->accuracy.count = va_arg(*ap,int);
+		if (op->accuracy.count == 0)
+			op->accuracy.is_zero = 1;
+		if (op->accuracy.count < 0)
+			op->accuracy.count = 0;
+	}
+	return (0);
 }
 
 int		ft_printf(const char *src_str, ...)
@@ -82,8 +118,8 @@ int		ft_printf(const char *src_str, ...)
 			return (count);
 		if (*str == '%')
 		{
-			str = check_star(str, &ap);
 			struct_set(&operation);
+			check_star(str, &ap, &operation);
 			check_oper(&str, &operation);
 		//	ptr_arg(398313224, operation);
 			if (specifier_processing(&ap, &str, operation, &count) == -1)

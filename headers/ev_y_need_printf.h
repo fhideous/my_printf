@@ -18,16 +18,17 @@ typedef struct t_operation
 	}flag;
 	struct {
 		unsigned char	is_argument;
-		unsigned int	count;
+		int				count;
 	}width;
 	struct {
 		unsigned char	is_argument;
-		unsigned int	count;
+		int 			count;
 		unsigned  char	is_zero;
 	}accuracy;
 }				s_operation;
 
-unsigned int		n_dig(unsigned int a);
+unsigned  int	n_dig(unsigned  int a);
+unsigned long int	un_dig(unsigned long int a);
 void set_minus(char **str);
 //unsigned int dectox_int(int a, char *s);
 int		write_str(char *str);
@@ -41,9 +42,9 @@ int		print_line(char** str);
 
 void	struct_set (s_operation *oper);
 void	check_flag(char **str, s_operation *oper);
-void	check_width(char** str, s_operation *oper);
+int		check_width(char** str, s_operation *oper);
 int		width_check_uint(char **str, s_operation oper);
-void	check_accuracy(char** str, s_operation *oper);
+int		check_accuracy(char** str, s_operation *oper);
 void	check_oper(char** str, s_operation *oper);
 
 int		ft_is_spec(char ch);
