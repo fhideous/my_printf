@@ -55,3 +55,20 @@ char	*ft_itoa(int n)
 	len += ft_len_n(n);
 	return (crt_str(new_n, len, is_neg));
 }
+
+char	*ft_litoa(long int n)
+{
+	int				len;
+	unsigned char	is_neg;
+
+	len = 0;
+	is_neg = 0;
+	if (n < 0)
+	{
+		len = 1;
+		is_neg = 1;
+		n *= -1;
+	}
+	len += ft_len_n(n);
+	return (crt_str(n, len, is_neg));
+}

@@ -27,7 +27,7 @@ typedef struct t_operation
 	}accuracy;
 }				s_operation;
 
-unsigned  int	n_dig(unsigned  int a);
+long int		n_dig(long int a);
 unsigned long int	un_dig(unsigned long int a);
 void set_minus(char **str);
 //unsigned int dectox_int(int a, char *s);

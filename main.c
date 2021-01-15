@@ -242,58 +242,58 @@ int main(void)
 	int i;
 //	i = 0;
 	//int j[] = {-123456, -99, -10, -1, 0, 1, 10, 99, 123456};
-	int a[] = {8, -2147483648, -9876543, -357, -10, -1, 0,
-			 1, 10, 357, 9251112, 2147483647, -16};
-	int a1[] = {-3};
-	char *check[] = { "%0.",
-			"%","%-", "%-4",  "%5", "%0", "%12", "%1",
-			"%.0", "%.3", "%.1", "%.12", "%0.0",
-			"%0.1", "%1.0", "%1.1",
-			"%-0", "%-0.0", "%-0.12", "%-12.0",
-			"%-.12", "%-14", "%-.1", "%.0",
-			"%-3", "%-6.4", "%4.5", "%02.1", "%012.2", "%-012.2",
-			"%-4", "%1.4", "%0.5", "%1.16", "%.16",
-			"%3.5", "%5.3", "%0.2", "%02", "%09","%02.4",
-			"%04.2", "%04.4", "%00", "%00.0",
-			"%.1", "%00",
-			"%-.0", "%-0.0", "-12.0", "%00.0", "%09",
-			"%-09.5", "%-9.0", "%04",
-			"%9",	"%09","%01", "%04", "%00", "%-9", "%-.9",
-			"%-.0", "%-0.0" ,  "%05.9", "%09.5",
-			"%-05.9", "%5.3", "%-5.3", "%-09.5", "%-9.5", "%-05.9",
-			"%00.0", "%5.3", "%0.2", "%02", "%3.0", "%05.5", "%0.10", "%.10",
-			"%240.2", "%-42.2", "%4.240", "%0.", "%5.", "%12."
-
-	};
-	char *check54[] = {"%1.0"};
-
-	int a_len = sizeof(a) / sizeof(a[0]);
-	int len_check = sizeof(check) / sizeof(*check);
-
-	char **int_check = line_for_check(check, 'd', len_check);
-	char **str_check = line_for_check(check, 's', len_check);
-	char **char_check = line_for_check(check, 'c', len_check);
-	char **un_check = line_for_check(check, 'u', len_check);
-	char **ptr_check = line_for_check(check, 'p', len_check);
-	char **hex_check = line_for_check(check, 'x', len_check);
+//	int a[] = {8, -2147483648, -9876543, -357, -10, -1, 0,
+//			 1, 10, 357, 9251112, 2147483647, -16};
+//	int a1[] = {-3};
+//	char *check[] = { "%0.",
+//			"%","%-", "%-4",  "%5", "%0", "%12", "%1",
+//			"%.0", "%.3", "%.1", "%.12", "%0.0",
+//			"%0.1", "%1.0", "%1.1",
+//			"%-0", "%-0.0", "%-0.12", "%-12.0",
+//			"%-.12", "%-14", "%-.1", "%.0",
+//			"%-3", "%-6.4", "%4.5", "%02.1", "%012.2", "%-012.2",
+//			"%-4", "%1.4", "%0.5", "%1.16", "%.16",
+//			"%3.5", "%5.3", "%0.2", "%02", "%09","%02.4",
+//			"%04.2", "%04.4", "%00", "%00.0",
+//			"%.1", "%00",
+//			"%-.0", "%-0.0", "-12.0", "%00.0", "%09",
+//			"%-09.5", "%-9.0", "%04",
+//			"%9",	"%09","%01", "%04", "%00", "%-9", "%-.9",
+//			"%-.0", "%-0.0" ,  "%05.9", "%09.5",
+//			"%-05.9", "%5.3", "%-5.3", "%-09.5", "%-9.5", "%-05.9",
+//			"%00.0", "%5.3", "%0.2", "%02", "%3.0", "%05.5", "%0.10", "%.10",
+//			"%240.2", "%-42.2", "%4.240", "%0.", "%5.", "%12."
 //
-	char *b[] = {"He", ",", "Hello ", "world ", "Hello world", "", " ", "!"};
-	char *b1[] = {"!"};
-	char c [] = {'a', 'b', 'c', 'd', '\t', '%', '\n'};
-
-	char c1 [] = {'c'};
-	unsigned int d[] = {0, 10, 245, 2147483647, 2147483649, 4294967295,
-					 429496726, 4294967296};
-	unsigned int d1[] = {0};
-
-	unsigned int e[] = {&d[0], &a[0], &c[0], &b[4] };
-
-
-	int b_len = sizeof(b) / sizeof(b[0]);
-	int c_len = sizeof (c) / sizeof(c[0]);
-	int d_len = sizeof (d) / sizeof(d[0]);
-	int e_len = sizeof (e) / sizeof(e[0]);
-
+//	};
+//	char *check54[] = {"%1.0"};
+//
+//	int a_len = sizeof(a) / sizeof(a[0]);
+//	int len_check = sizeof(check) / sizeof(*check);
+//
+//	char **int_check = line_for_check(check, 'd', len_check);
+//	char **str_check = line_for_check(check, 's', len_check);
+//	char **char_check = line_for_check(check, 'c', len_check);
+//	char **un_check = line_for_check(check, 'u', len_check);
+//	char **ptr_check = line_for_check(check, 'p', len_check);
+//	char **hex_check = line_for_check(check, 'x', len_check);
+////
+//	char *b[] = {"He", ",", "Hello ", "world ", "Hello world", "", " ", "!"};
+//	char *b1[] = {"!"};
+//	char c [] = {'a', 'b', 'c', 'd', '\t', '%', '\n'};
+//
+//	char c1 [] = {'c'};
+//	unsigned int d[] = {0, 10, 245, 2147483647, 2147483649, 4294967295,
+//					 429496726, 4294967296};
+//	unsigned int d1[] = {0};
+//
+//	unsigned int e[] = {&d[0], &a[0], &c[0], &b[4] };
+//
+//
+//	int b_len = sizeof(b) / sizeof(b[0]);
+//	int c_len = sizeof (c) / sizeof(c[0]);
+//	int d_len = sizeof (d) / sizeof(d[0]);
+//	int e_len = sizeof (e) / sizeof(e[0]);
+//
 
 	int g = -245;
 	int l = 245;
@@ -304,126 +304,165 @@ int main(void)
 	int r00 = 0;
 
 
-
-	printf("%*s\n", -32, "abc");
-	ft_printf("%*s\n", -32, "abc");
+	printf(	"|%0d|\n", 	-2147483648);
+	ft_printf(	"|%0d|\n",	-2147483648);
 	printf ("\n");
 
-	printf("%.*s\n", -3, "hello");
-	ft_printf("%.*s\n", -3, "hello");
+	printf(	"|%-5x|\n", 52625);
+	ft_printf(	"|%-5x|\n", 52625);
 	printf ("\n");
 
-	printf("%-*.*s\n", 7, 3, "yolo");
-	ft_printf("%-*.*s\n", 7, 3, "yolo");
+	printf(	"|%-5x|\n", 52625);
+	ft_printf(	"|%-5x|\n", 52625);
 	printf ("\n");
 
-	printf("%.*s\n", 3, "hello");
-	ft_printf("%.*s\n", 3, "hello");
-	printf ("\n");
-
-	printf("|%c\n", -0);
-	ft_printf("|%c\n", -0);
-	printf ("\n");
-
-	printf("|%c\n", 0);
-	ft_printf("|%c\n", 0);
-	printf ("\n");
-
-	printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
-	ft_printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
-	printf ("\n");
-
-	printf("|%-10s|\n", "HELLO!");
-	ft_printf("|%-10s|\n", "HELLO!");
-	printf ("\n");
-
-	printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-	ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-	printf ("\n");
-
-	printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
-	ft_printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
-	printf ("\n");
-
-	printf("|%c|\n", '\n');
-	ft_printf("|%c|\n", '\n');
-	printf ("\n");
-
-	printf("%u\n", 4294967295u);
-	ft_printf("%u\n", 4294967295u);
-	printf ("\n");
-
-	printf("|%4.12i|\n", g);
-	ft_printf("|%4.12i|\n", g, 23);
-	printf ("\n");
-
-	printf("hello %s\n", "gavin");
-	ft_printf("hello %s\n", "gavin");
+	printf("|%-4x|\n", 9648627);
+	ft_printf("|%-4x|\n", 9648627);
 	printf ("\n");
 
 
-	printf("%*s.\n", 32,"abc");
-	ft_printf("%*s.\n", 32,"abc");
+	printf("|%8.3x|\n", 8375);
+	ft_printf("|%8.3x|\n", 8375);
+	printf ("\n");
+
+	printf("|%8.3x|\n", 8375);
+	ft_printf("|%8.3x|\n", 8375);
+	printf ("\n");
+
+	printf("|%0x|\n", 1);
+	ft_printf("|%0x|\n", 1);
 	printf ("\n");
 
 
-	printf("%5c.\n", '\x01');
-	ft_printf("%5c.\n",'\x01');
+	printf("|%08x|\n", 1);
+	ft_printf("|%08x|\n", 1);
 	printf ("\n");
 
-	printf("%5c.\n", '\0');
-	ft_printf("%5c.\n",'\0');
-	printf ("\n");
 
-	printf("%3.1s.\n", NULL);
-	ft_printf("%3.1s.\n", NULL);
-	printf ("\n");
-
-	printf("%.03s.\n", NULL);
-	ft_printf("%.03s.\n", NULL);
-	printf ("\n");
-
-	printf("|%.20s.|\n", NULL);
-	ft_printf("|%.20s.|\n", NULL);
-	printf ("\n");
-
-	printf("|%.7s|\n", str);
-	ft_printf("|%.7s|\n", str);
-	printf ("\n");
-
-	printf("|%.*d|\n", -3, 12345);
-	ft_printf("|%.*d|\n", -3, 12345);
-	printf ("\n");
-
-	printf("|%4.12i|\n", g);
-	ft_printf("|%4.12i|\n", g);
-	printf ("\n");
-
-	"%.7s",
-	printf("|%.12i|\n", g);
-	ft_printf("|%.12i|\n", g);
-	printf ("\n");
-
-	printf("|%14.12i|\n", g);
-	ft_printf("|%14.12i|\n", g);
-	printf ("\n");
-
-	printf("|%.i|\n", g);
-	ft_printf("|%.i|\n", g);
-	printf ("\n");
-
-	printf("|%4.2i|\n", g);
-	ft_printf("|%4.2i|\n", g);
-	printf ("\n");
-
-	printf("|%14.2i|\n", g);
-	ft_printf("|%14.2i|\n", g);
-	printf ("\n");
-
-	printf("|%4.12i|\n", g);
-	ft_printf("|%4.12i|\n", g);
-	printf ("\n");
-
+//
+//	printf("%#x", 4294967295u);
+//	ft_printf("%#x", 4294967295u);
+//	printf ("\n");
+//
+//	printf("%*s\n", -32, "abc");
+//	ft_printf("%*s\n", -32, "abc");
+//	printf ("\n");
+//
+//	printf("%.*s\n", -3, "hello");
+//	ft_printf("%.*s\n", -3, "hello");
+//	printf ("\n");
+//
+//	printf("%-*.*s\n", 7, 3, "yolo");
+//	ft_printf("%-*.*s\n", 7, 3, "yolo");
+//	printf ("\n");
+//
+//	printf("%.*s\n", 3, "hello");
+//	ft_printf("%.*s\n", 3, "hello");
+//	printf ("\n");
+//
+//	printf("|%c\n", -0);
+//	ft_printf("|%c\n", -0);
+//	printf ("\n");
+//
+//	printf("|%c\n", 0);
+//	ft_printf("|%c\n", 0);
+//	printf ("\n");
+//
+//	printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
+//	ft_printf("%% *.5i 42 == |%*.5i|\n", 4, 42);
+//	printf ("\n");
+//
+//	printf("|%-10s|\n", "HELLO!");
+//	ft_printf("|%-10s|\n", "HELLO!");
+//	printf ("\n");
+//
+//	printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+//	ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+//	printf ("\n");
+//
+//	printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
+//	ft_printf("Lalalala, %d%% des gens qui parlent à Ly adorent %s. Ou Presque. %p\n", 100, "Ly", &r00);
+//	printf ("\n");
+//
+//	printf("|%c|\n", '\n');
+//	ft_printf("|%c|\n", '\n');
+//	printf ("\n");
+//
+//	printf("%u\n", 4294967295u);
+//	ft_printf("%u\n", 4294967295u);
+//	printf ("\n");
+//
+//	printf("|%4.12i|\n", g);
+//	ft_printf("|%4.12i|\n", g, 23);
+//	printf ("\n");
+//
+//	printf("hello %s\n", "gavin");
+//	ft_printf("hello %s\n", "gavin");
+//	printf ("\n");
+//
+//
+//	printf("%*s.\n", 32,"abc");
+//	ft_printf("%*s.\n", 32,"abc");
+//	printf ("\n");
+//
+//
+//	printf("%5c.\n", '\x01');
+//	ft_printf("%5c.\n",'\x01');
+//	printf ("\n");
+//
+//	printf("%5c.\n", '\0');
+//	ft_printf("%5c.\n",'\0');
+//	printf ("\n");
+//
+//	printf("%3.1s.\n", NULL);
+//	ft_printf("%3.1s.\n", NULL);
+//	printf ("\n");
+//
+//	printf("%.03s.\n", NULL);
+//	ft_printf("%.03s.\n", NULL);
+//	printf ("\n");
+//
+//	printf("|%.20s.|\n", NULL);
+//	ft_printf("|%.20s.|\n", NULL);
+//	printf ("\n");
+//
+//	printf("|%.7s|\n", str);
+//	ft_printf("|%.7s|\n", str);
+//	printf ("\n");
+//
+//	printf("|%.*d|\n", -3, 12345);
+//	ft_printf("|%.*d|\n", -3, 12345);
+//	printf ("\n");
+//
+//	printf("|%4.12i|\n", g);
+//	ft_printf("|%4.12i|\n", g);
+//	printf ("\n");
+//
+//	"%.7s",
+//	printf("|%.12i|\n", g);
+//	ft_printf("|%.12i|\n", g);
+//	printf ("\n");
+//
+//	printf("|%14.12i|\n", g);
+//	ft_printf("|%14.12i|\n", g);
+//	printf ("\n");
+//
+//	printf("|%.i|\n", g);
+//	ft_printf("|%.i|\n", g);
+//	printf ("\n");
+//
+//	printf("|%4.2i|\n", g);
+//	ft_printf("|%4.2i|\n", g);
+//	printf ("\n");
+//
+//	printf("|%14.2i|\n", g);
+//	ft_printf("|%14.2i|\n", g);
+//	printf ("\n");
+//
+//	printf("|%4.12i|\n", g);
+//	ft_printf("|%4.12i|\n", g);
+//	printf ("\n");
+//
 
 
 	//int	n = -4;
@@ -439,7 +478,7 @@ int main(void)
 	i = -1;
 //	while (++i < b_len)
 //		check_my_str(b[i], str_check, len_check);
-	i = -1;
+//	i = -1;
 //	while (++i < c_len)
 //		check_my_char(c[i], char_check, len_check);
 //	i = -1;
@@ -454,10 +493,10 @@ int main(void)
 
 ///////////////			Original
 
-//	i = -1;
+	i = -1;
 //	while (++i < a_len)
 //		check_orig(a[i], int_check, len_check);
-////	i = -1;
+//	i = -1;
 //	while (++i < b_len)
 //		check_orig_str(b[i], str_check, len_check);
 //	i = -1;
@@ -469,7 +508,7 @@ int main(void)
 //	i = -1;
 //	while (++i < e_len)
 //		check_orig_ptr(e[i], ptr_check, len_check);
-//	i = -1;
+	i = -1;
 //	while (++i < d_len)
 //		check_un_orig(d[i], hex_check, len_check);
 
