@@ -18,9 +18,9 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	if (**str == 'p')
 		n = ptr_arg((unsigned long int)va_arg(*ap, void *), oper);
 	if (**str == 'x')
-		n = hex_arg(va_arg(*ap, unsigned long int),oper, 1);
+		n = hex_arg(va_arg(*ap,  unsigned int), oper, 1);
 	if (**str == 'X')
-		n = hex_arg(va_arg(*ap, unsigned long int ),oper, 0);
+		n = hex_arg(va_arg(*ap,  unsigned int ), oper, 0);
 	if(n != -1)
 		*count += n;
 	else
@@ -110,6 +110,22 @@ int		ft_printf(const char *src_str, ...)
 	count = 0;
 	str = (char *)src_str;
 	va_start(ap, src_str);
+//	count = va_arg(ap, int);
+//	count = va_arg(ap, int);
+//	count = va_arg(ap, unsigned int);
+//
+//	count = va_arg(ap, int);
+//	count = va_arg(ap, int);
+//	count = va_arg(ap, unsigned long int);
+//
+//	count = va_arg(ap, int);
+//	count = va_arg(ap, int);
+//	count = va_arg(ap,  int);
+//
+//	count = va_arg(ap, unsigned long int);
+//	count = va_arg(ap, unsigned long int);
+//	count = va_arg(ap, unsigned long int);
+
 	while (str && *str)
 	{
 		if (((count += print_line(&str)) == -1))

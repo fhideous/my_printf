@@ -30,7 +30,7 @@ void check_flag(char **str, s_operation *oper)
 		oper->flag.is_plus = 1;
 		check_flag(&*str, *&oper);
 	}
-	if (**str == '0' && oper->flag.is_zero == 0)
+	if (**str == '0')
 	{
 		if(!oper->flag.is_minus)
 			oper->flag.is_zero = 1;

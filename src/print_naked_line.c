@@ -52,9 +52,15 @@ int print_n_spaces (int n)
 	return (n);
 }
 
+//int print_percant_width(char **str)
+//{
+//	if
+//}
+
 int print_line(char** str)
 {
 	int i;
+	int width;
 
 	i = 0;
 	while(**str != '\0')
@@ -65,6 +71,7 @@ int print_line(char** str)
 		{
 			if (print_percent(&*str))
 			{
+
 				i++;
 				continue;
 			}

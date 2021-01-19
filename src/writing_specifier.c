@@ -179,14 +179,26 @@ int str_arg(char *arg, s_operation oper)
 int char_arg(int arg, s_operation oper)
 {
 	int i;
-	if (arg == (char)'\0' && !oper.width.count)
-		return (1);
-	char * str = ft_calloc (2, sizeof(char));
+
+	char * str;
+	str = ft_calloc (2, sizeof(char));
 	str[0] = (char)arg;
 
 	i = -1;
-	if (arg == '\0')
-		i = 0;
+	if (arg == (char) '\0')
+	{
+		i = oper.width.count;
+		if (oper.flag.is_minus)
+			write (1, &arg, 1);
+		while (--i > 0)
+			write(1, " ", 1);
+		if (!oper.flag.is_minus)
+			write(1, &arg, 1);
+//		if (arg == (char) '\0' && !oper.width.count)
+//			write(1, &arg, 1);
+		free(str);
+		return (oper.width.count > 0 ? oper.width.count : 1);
+	}
 	if (oper.width.count > (int)ft_strlen(str))
 		i += width_check_str(&str, oper);
 	if (oper.flag.is_zero)
@@ -207,6 +219,8 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 
 	i = 0;
 //	str = ft_itoa(arg);
+	if (oper.accuracy.count || oper.accuracy.is_zero)
+		oper.flag.is_zero = 0;
 	str = ft_utoa(arg);   // не подтягивается
 	if (*str == '0' && !oper.width.count && oper.accuracy.is_zero)
 		return (0);
@@ -270,6 +284,8 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	len = un_dig(arg) + 1;
 	i = len;
 	str = ft_calloc ((len), sizeof(char));
+	if (!arg)
+		str[0] = '0';
 	while (arg || arg / 16  )
 	{
 		rem = arg % 16;
@@ -316,7 +332,7 @@ int		accuracy_hex_check(char **str, s_operation oper)
 		step = str_len;
 	if (oper.width.count > oper.accuracy.count && oper.width.count > str_len/*&& oper.accuracy.count != 0 && !oper.accuracy.is_zero*/)
 	{
-		if (oper.flag.is_zero && !oper.accuracy.count)
+		if (oper.flag.is_zero && !oper.accuracy.count && !oper.accuracy.is_zero)
 			i = 48; //48
 		else
 			i = 32;
@@ -342,7 +358,7 @@ int		accuracy_hex_check(char **str, s_operation oper)
 	return (0);
 }
 
-int		hex_arg (unsigned long int arg, s_operation oper, int is_low)
+int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 {
 	char			*str;
 	unsigned int	i;
@@ -353,7 +369,9 @@ int		hex_arg (unsigned long int arg, s_operation oper, int is_low)
 //	if (arg == 0)
 //		len = 1;
 //	else
-		len = n_dig(arg) + 1;
+	if (oper.accuracy.count || oper.accuracy.is_zero)
+		oper.flag.is_zero = 0;
+	len = n_dig(arg) + 1;
 	i = len;
 	str = ft_calloc ((len), sizeof(char));
 	if (oper.flag.is_minus)
