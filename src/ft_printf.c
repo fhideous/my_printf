@@ -6,7 +6,7 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 
 	n = -1;
 	if (**str == '%')
-		(++*str);
+		n = percant_arg(va_arg(*ap,  int ), oper);
 	if (**str == 'd' || **str == 'i')
 		n = int_arg(va_arg(*ap, int), oper);
 	if (**str == 's')

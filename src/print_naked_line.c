@@ -60,7 +60,6 @@ int print_n_spaces (int n)
 int print_line(char** str)
 {
 	int i;
-	int width;
 
 	i = 0;
 	while(**str != '\0')
@@ -69,13 +68,12 @@ int print_line(char** str)
 			i += print_backslash(&*str);
 		if (**str == '%')
 		{
-			if (print_percent(&*str))
-			{
-
-				i++;
-				continue;
-			}
-			else
+//			if (print_percent(&*str))
+//			{
+//				i++;
+//				continue;
+//			}
+//			else
 				return (i);
 		}
 		if (!(write(1, *str, 1)))

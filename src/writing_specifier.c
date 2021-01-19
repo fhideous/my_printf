@@ -402,3 +402,10 @@ int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 
 	return (i);
 }
+
+int		percant_arg(int arg, s_operation oper)
+{
+	oper.accuracy.is_zero = 10;
+	write(1, "%", 1);
+	return (arg);
+}

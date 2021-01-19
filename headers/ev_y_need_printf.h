@@ -56,6 +56,7 @@ int		char_arg(int arg, s_operation oper);
 int		unsigned_arg (unsigned int arg, s_operation oper);
 int		ptr_arg (unsigned long int arg, s_operation oper);
 int		hex_arg(unsigned int arg, s_operation oper, int is_low);
+int		percant_arg(int arg, s_operation oper);
 
 int		plus_flag(int integer);
 char	*flag_zero_str(char *str, int len);
