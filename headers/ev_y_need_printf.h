@@ -34,22 +34,24 @@ void set_minus(char **str);
 int		write_str(char *str);
 int		write_n_symb(int chr, int n);
 
+void	print_n_char(int ch, int n);
 void	print_oper (s_operation oper);
 int		print_backslash(char** str);
 int		print_percent (char** str);
-int		print_n_spaces (int n);
 int		print_line(char** str);
 
+
 void	struct_set (s_operation *oper);
-void	check_flag(char **str, s_operation *oper);
-int		check_width(char** str, s_operation *oper);
+void	find_flag(char **str, s_operation *oper);
+int		find_width(char** str, s_operation *oper);
 int		width_check_uint(char **str, s_operation oper);
-int		check_accuracy(char** str, s_operation *oper);
-void	check_oper(char** str, s_operation *oper);
+int		find_accuracy(char** str, s_operation *oper);
+void	find_oper(char** str, s_operation *oper);
 
 int		ft_is_spec(char ch);
 char	*line_from_same_asymb(int symb, int len);
 
+int		space_count(char *str);
 int		int_arg(long int arg, s_operation oper);
 int		str_arg(char *str, s_operation oper);
 int		char_arg(int arg, s_operation oper);
@@ -65,5 +67,4 @@ int		accuracy_check(char **str, s_operation oper);
 int		width_check_str(char** str, s_operation oper);
 int		accuracy_check_str(char **str, s_operation oper);
 int		is_plus_check(char **str, s_operation oper);
-int		space_check(char **str, s_operation oper, int integer);
 #endif

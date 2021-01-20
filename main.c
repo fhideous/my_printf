@@ -325,6 +325,18 @@ int main(void)
 	char	*t = "0x12345678";
 	char	*u = "-0";
 
+	printf("%.1i, %.1d, %.1d, %.1d, %.1d, %.1d, %.1d, %.1d\n", i, j, k, l, m,
+	c, e, d);
+	ft_printf("%.1i, %.1d, %.1d, %.1d, %.1d, %.1d, %.1d, %.1d\n\n", i, j, k, l,
+	m, c, e, d);
+	printf ("\n");
+
+
+	printf("%1.i, %1.d, %1.d, %1.d, %1.d, %1.d, %1.d, %1.d\n", i, j, k, l, m,
+	c, e, d);
+	ft_printf("%1.i, %1.d, %1.d, %1.d, %1.d, %1.d, %1.d, %1.d\n", i, j, k, l,
+	m, c, e, d);
+	printf ("\n");
 
 
 	printf("|%*i, %*d, %*d, %*d, %*d, %*d, %*d, %*d|\n", a, i, a, j, a, k, a, l,

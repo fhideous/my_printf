@@ -1,146 +1,5 @@
 #include "../headers/ev_y_need_printf.h"
 
-
-//#include "headers/libft_a.h"
-
-void			*f_memmove(void *dst, const void *src, size_t len)
-{
-	unsigned char		*ptr;
-	const unsigned char	*src_ptr;
-
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	ptr = (unsigned char*)dst;
-	src_ptr = (unsigned char*)src;
-	if (src_ptr < ptr)
-		while (len--)
-			*(ptr + len) = *(src_ptr + len);
-	else
-		while (len--)
-			*ptr++ = *src_ptr++;
-	return (dst);
-}
-
-int space_count (char * str)
-{
-	int i;
-	int count;
-
-	i = -1;
-	count = 0;
-	while (str[++i])
-		if (str[i] == ' ')
-			count++;
-	return (count);
-}
-
-int add_minus (char** str, int arg, s_operation oper)
-{
-	char * tmp;
-	int i;
-	int n_len;
-
-	n_len = (int)ft_strlen(*str) - space_count(*str);
-	if ((oper.flag.is_zero) && oper.width.count <= n_dig(arg))
-	{
-		if (!(tmp = ft_strjoin("-", *str)))
-			return (-1);
-		free(*str);
-		*str = tmp;
-	} else
-	if (oper.accuracy.count >= (int)ft_strlen(*str)/* || (oper.accuracy.is_zero &&
-	n_len == 1)*/)
-	{
-		if (!(tmp = ft_strjoin("-", *str)))
-			return (-1);
-		free(*str);
-		*str = tmp;
-	}
-	else if (!oper.accuracy.count &&oper.accuracy.is_zero && !oper.width.count)
-	{
-		if (!(tmp = ft_strjoin("-", *str)))
-			return (-1);
-		free(*str);
-		*str = tmp;
-	}
-	else if (!ft_isdigit(**str))
-	{
-		i = 0;
-		while (*(*str + i) == ' ')
-			i++;
-		i = --i > 0 ? i : 0;
-		*(*str + i) = '-';
-	}
-	else if (ft_isdigit(**str))
-	{
-		if (**str != '0' && !space_count(*str))
-		{
-			if (!(tmp = ft_strjoin("-", *str)))
-				return (-1);
-
-			free(*str);
-			*str = tmp;
-		}else
-		{
-			*str = f_memmove(*str + 1, *str, n_len);
-			if (**str != '0' || oper.accuracy.count)
-				(*str) = *str - 1;
-			**str = '-';
-		}
-	}
-	return (1);
-}
-
-int int_arg(long int arg, s_operation oper)
-{
-	char *str;
-	int i;
-
-	i = 0;
-	if (oper.accuracy.count || oper.accuracy.is_zero)
-		oper.flag.is_zero = 0;
-//	if (arg == -2147483648)
-//		str = ft_strjoin("", "-2147483648");
-//	else
-		str = ft_itoa(arg > 0 ? arg : -arg);				////change to ltoa
-	if (*str == '0' && oper.accuracy.is_zero)
-	{
-		if (oper.width.count == 0)
-			return (0);
-		else
-			str = line_from_same_asymb(' ', oper.width.count);
-		return(i+= print_line(&str));
-	}
-	if (oper.accuracy.count > 0)
-		i += accuracy_check(&str, oper);
-	if (oper.width.count > (int)ft_strlen(str))
-		i += width_check(&str, oper);
-	if (arg < 0 && arg != -2147483648)
-		add_minus(&str, -1 * arg, oper);
-	i += print_line(&str);
-	//free (str);   ////// Need to clear this shit
-	return (i);
-}
-
-char	*ft2_strjoin(char const *s1, char const *s2)
-{
-	char	*conc_str;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	conc_str = (char *)malloc((s1_len + s2_len + 1) *sizeof(char));
-	if (!conc_str)
-		return (NULL);
-	ft_memcpy(conc_str, s1, s1_len);
-	ft_memcpy(conc_str + s1_len, s2, s2_len);
-	*(conc_str + s1_len + s2_len) = '\0';
-	return (conc_str);
-}
-
 int str_arg(char *arg, s_operation oper)
 {
 	int i;
@@ -150,7 +9,7 @@ int str_arg(char *arg, s_operation oper)
 	if (!arg)
 		str = ft_strjoin("(null)", "");
 	else
-		str = ft2_strjoin(arg, "");
+		str = ft_strjoin(arg, "");
 	arg_len = ft_strlen(str);
 	i = 0;
 	if (oper.accuracy.count > 0 || oper.accuracy.is_zero)
@@ -397,12 +256,6 @@ int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 	i = 0;
 	i += print_line(&str);
 	return (i);
-}
-
-void print_n_char(int ch, int n)
-{
-	while (n--)
-		write(1, &ch, 1);
 }
 
 int		percant_arg(int arg, s_operation oper)

@@ -1,39 +1,43 @@
 #include "../headers/ev_y_need_printf.h"
 
-long int	n_dig(long int a)
+long int			n_dig(long int a)
 {
-	if(a/10 != 0)
-		return (1 + n_dig(a/10));
+	if (a / 10 != 0)
+		return (1 + n_dig(a / 10));
 	return (1);
 }
 
 unsigned long int	un_dig(unsigned long int a)
 {
-	if(a/10 != 0)
-		return (1 + un_dig(a/10));
+	if (a / 10 != 0)
+		return (1 + un_dig(a / 10));
 	return (1);
 }
 
-void set_minus(char **str)
+int					ft_is_spec(char ch)
 {
-	int i;
-//	char *tmp;
-
-	i = 0;
-	while (*str && !ft_isdigit(*(*str + i)))
-		i++;
-	//if (i != 0)
-	*(*str + i - 1) = '-';
-//	else
-//	{
-//		if (!(tmp = ft_strjoin("-", *str)))
-//			return (-1);
-//			free(*str);
-//			*str = tmp;
-//	}
+	if (ch == 'd' || ch == 'i'
+		|| ch == 's' || ch == 'c'
+		|| ch == 'u' || ch == 'p'
+		|| ch == 'x' || ch == 'X')
+		return (1);
+	return (0);
 }
 
-int write_str(char *str)
+int					space_count(char *str)
+{
+	int i;
+	int count;
+
+	i = -1;
+	count = 0;
+	while (str[++i])
+		if (str[i] == ' ')
+			count++;
+	return (count);
+}
+
+int					write_str(char *str)
 {
 	int i;
 
@@ -47,13 +51,13 @@ int write_str(char *str)
 	return (i);
 }
 
-int write_n_symb(int chr, int n)
+int					write_n_symb(int chr, int n)
 {
 	int i;
 
 	i = n;
 	while (n-- > 0)
-		if (write(1, &chr, 1) == - 1)
+		if (write(1, &chr, 1) == -1)
 			return (-1);
 	return (i);
 }

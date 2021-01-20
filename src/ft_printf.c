@@ -80,7 +80,7 @@ int		ft_printf(const char *src_str, ...)
 		{
 			struct_set(&operation);
 			check_star(str, &ap, &operation);
-			check_oper(&str, &operation);
+			find_oper(&str, &operation);
 			if (specifier_processing(&ap, &str, operation, &count) == -1)
 				return (-1);
 		}
