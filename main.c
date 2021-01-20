@@ -38,13 +38,13 @@ void check_my (int arg, char *strs[], int len)
 	ft_printf("==================================\n");
 	while (j < len)
 	{
-	//	ft_printf("\nmy:\n");
+		//	ft_printf("\nmy:\n");
 		ft_printf("%s:\t", strs[j]);
 		int i =  ft_printf (strs[j], arg);
 		ft_printf("\t return: %d\n", i);
 		//*strs++;
 		j++;
-	//	printf ("%s", *strs);
+		//	printf ("%s", *strs);
 	}
 }
 
@@ -56,7 +56,7 @@ void check_orig (int arg, char **strs, int len)
 	printf("==================================\n");
 	while (j < len)
 	{
-	//	printf("\noriginal:\n");
+		//	printf("\noriginal:\n");
 		printf("%s:\t", strs[j]);
 		int i = printf (strs[j], arg);
 		printf("\t return: %d\n", i);
@@ -308,12 +308,12 @@ int main(void)
 	int		d = 2147483647;
 	int		e = -2147483648;
 	int		f = 42;
-		g = 25;
+	g = 25;
 	int		h = 4200;
-			i = 8;
+	i = 8;
 	int		j = -12;
 	int		k = 123456789;
-			l = 0;
+	l = 0;
 	int		m = -12345678;
 
 	char	*n = "abcdefghijklmnop";
@@ -325,29 +325,47 @@ int main(void)
 	char	*t = "0x12345678";
 	char	*u = "-0";
 
-	printf("|%04%|\n");
-	printf("|%0*.*u|\n", 4, 0, 8);
+
+
+	printf("|%*i, %*d, %*d, %*d, %*d, %*d, %*d, %*d|\n", a, i, a, j, a, k, a, l,
+		   a, m, a, c, a, e, a, d);
+	ft_printf("|%*i, %*d, %*d, %*d, %*d, %*d, %*d, %*d|\n", a, i, a, j, a, k,
+			  a, l,
+			  a, m, a, c, a, e, a, d);
+	printf ("\n");
+
+	printf("%010%\n");
+	ft_printf("%010%\n");
+
+	printf("%1.p\n" ,&f);
+	ft_printf("%1.p\n" , &f);
+
+	printf("%5.p\n" ,NULL);
+	ft_printf("%5.p\n" ,NULL);
+
+	printf("|%%  %04%|\n");
+	ft_printf("|%%  %04%|\n");
 	printf ("\n");
 
 
 	printf(	"|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, "
-		 "%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
-   " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
-		 a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
-		 a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c,
-		 a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
-	ft_printf(	"|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*"
-		  ".*x, "
 			   "%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
 			   " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
 			   a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
 			   a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c,
 			   a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
+	ft_printf(	"|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*"
+				  ".*x, "
+				  "%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
+				  " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
+				  a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
+				  a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c,
+				  a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
 	printf ("\n");
 
 
 	printf("|%0*.*u|\n", 4, 0, 8);
-	printf("|%0*.*u|\n", 4, 0, 8);
+	ft_printf("|%0*.*u|\n", 4, 0, 8);
 	printf ("\n");
 
 
@@ -357,17 +375,17 @@ int main(void)
 
 
 	printf("|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
-		"%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
-  " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
-			a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
-			a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a,
-			b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
-	ft_printf("|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
 		   "%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
 		   " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
 		   a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
 		   a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a,
 		   b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
+	ft_printf("|%0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
+			  "%0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x,"
+			  " %0*.*X, %0*.*u, %0*.*x, %0*.*X, %0*.*u, %0*.*x, %0*.*X|\n",
+			  a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k,
+			  a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a,
+			  b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
 	printf ("\n");
 
 
@@ -377,18 +395,18 @@ int main(void)
 		   " %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X|\n",
 		   a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k, a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
 	ft_printf("|%*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X, "
-		   "%*.*u,"
-		   " %*.*x, %*.*X, %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X,"
-		   " %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X|\n",
-		   a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k, a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
+			  "%*.*u,"
+			  " %*.*x, %*.*X, %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X,"
+			  " %*.*u, %*.*x, %*.*X, %*.*u, %*.*x, %*.*X|\n",
+			  a, b, i, a, b, i, a, b, i, a, b, j, a, b, j, a, b, j, a, b, k, a, b, k, a, b, k, a, b, l, a, b, l, a, b, l, a, b, m, a, b, m, a, b, m, a, b, c, a, b, c, a, b, c, a, b, d, a, b, d, a, b, d, a, b, e, a, b, e, a, b, e);
 	printf ("\n");
 
 
 	printf("|%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X|\n", i, j, k, l, m, n,
-		c, c, j, j, j);
-	ft_printf("|%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X|\n", i, j, k, l,
-		   m, n,
 		   c, c, j, j, j);
+	ft_printf("|%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X|\n", i, j, k, l,
+			  m, n,
+			  c, c, j, j, j);
 	printf ("\n");
 
 

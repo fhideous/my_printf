@@ -275,8 +275,8 @@ static char	check_hex_high (int n)
 
 int		ptr_arg (unsigned long int arg, s_operation oper)
 {
-	char	*str;
-	unsigned int		i;
+	char 			*str;
+	unsigned int	i;
 	unsigned int 	len;
 	unsigned int	rem;
 	char			*tmp;
@@ -295,6 +295,8 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	i = 0;
 	while (!ft_isalnum(str[i]) && i < len)
 		str[i++] = '*';
+	if (oper.accuracy.is_zero && len == 2)
+		i = len;
 	if (!(tmp = ft_substr(str, i, len - i)))
 		return (-1);
 	free (str);
@@ -361,14 +363,11 @@ int		accuracy_hex_check(char **str, s_operation oper)
 int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 {
 	char			*str;
-	unsigned int	i;
-	unsigned int	len;
+	int	i;
+	int	len;
 	unsigned int	rem;
 	char			*tmp;
 
-//	if (arg == 0)
-//		len = 1;
-//	else
 	if (oper.accuracy.count || oper.accuracy.is_zero)
 		oper.flag.is_zero = 0;
 	len = n_dig(arg) + 1;
@@ -394,18 +393,33 @@ int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 		return (-1);
 	free (str);
 	str = tmp;
-//	width_check_str(&str, oper);
-//	if (oper.accuracy.count + oper.flag.is_zero < oper.width.count)
 		accuracy_hex_check(&str, oper);
 	i = 0;
 	i += print_line(&str);
-
 	return (i);
+}
+
+void print_n_char(int ch, int n)
+{
+	while (n--)
+		write(1, &ch, 1);
 }
 
 int		percant_arg(int arg, s_operation oper)
 {
-	oper.accuracy.is_zero = 10;
-	write(1, "%", 1);
-	return (arg);
+	int i;
+
+	if (oper.width.count)
+	{
+		if (oper.flag.is_zero)
+			i = 48; //48
+		else
+			i = 32;
+		if (oper.flag.is_minus)
+			write (1, &arg, 1);
+		print_n_char(i, oper.width.count - 1);
+		if (!oper.flag.is_minus)
+			write (1, &arg, 1);
+	}
+	return (oper.width.count ? oper.width.count : 0);
 }

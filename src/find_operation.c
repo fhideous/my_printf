@@ -41,15 +41,10 @@ void check_flag(char **str, s_operation *oper)
 		oper->flag.is_space = 1;
 		check_flag(&*str, *&oper);
 	}
-	if (**str == '#')
-	{
-		oper->flag.is_lattice = 1;
-		check_flag(&*str, *&oper);
-	}
-
 }
 
 // числа всегда положительные
+
 int check_width(char** str, s_operation *oper)
 {
 	int width;
@@ -80,9 +75,11 @@ int ft_is_spec(char ch)
 		return (1);
 	return (0);
 }
+
 // если указана точность, 0 не учитывается
 // при отриц точности - ничего
 // при не сказанной точности - точность = 0
+
 int check_accuracy(char** str, s_operation *oper)
 {
 	int skip;
@@ -94,7 +91,6 @@ int check_accuracy(char** str, s_operation *oper)
 	if (ft_isdigit (**str))
 	{
 		oper->accuracy.count = ft_atoi(*str);
-//		oper->flag.is_zero = 0;
 	}
 	else if (**str == '*')
 		return (1);
@@ -105,12 +101,12 @@ int check_accuracy(char** str, s_operation *oper)
 	*str += (oper->accuracy.is_argument + skip);
 	return (0);
 }
+
 // если спецификатор отличен от тех, что чуществует - ub
 // если аргументов недостаточно - ub
+
 void check_oper(char** str, s_operation *oper)
 {
-//	unsigned int i;
-//	i = 0;
 	check_flag(&*str, *&oper);
 	*str += check_width(&*str, *&oper);
 	if (**str == '.')
