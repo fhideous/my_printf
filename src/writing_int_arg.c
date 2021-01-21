@@ -107,6 +107,11 @@ int		int_arg(long int arg, s_operation oper)
 		if (add_minus(&str, -1 * arg, oper) == -1)
 			return (-1);
 	i += print_line(&str);
-	//free (str);   ////// Need to clear this shit
+
+//	if (arg < 0)
+//		i++;
+//	str = str - 4;
+//	free(str);
+	//free (str - i);   ////// Need to clear this shit
 	return (i);
 }

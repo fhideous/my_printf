@@ -15,6 +15,7 @@ int		width_check_str(char **str, s_operation oper)
 	char	*same_symb_l;
 	int		str_len;
 
+//	tmp = *str;
 	str_len = ft_strlen(*str);
 	diff_w_a = oper.width.count - ft_strlen(*str);
 	if (diff_w_a >= 0)
@@ -27,7 +28,7 @@ int		width_check_str(char **str, s_operation oper)
 			same_symb_l = ft_memmove(same_symb_l +
 					oper.width.count - str_len,
 					*str, str_len) - oper.width.count + str_len;
-//		free(*str);				//need to clear
+		free(*str);
 		*str = same_symb_l;
 	}
 	return (0);

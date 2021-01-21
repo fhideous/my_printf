@@ -1,9 +1,20 @@
 #include "../headers/ev_y_need_printf.h"
 
+void choice_zero_str(char **str, s_operation oper, int arg_len)
+{
+	if (oper.width.count - oper.accuracy.count - arg_len > 0)
+		*str = flag_zero_str(*str, oper.width.count - oper.accuracy.count-
+		arg_len);
+	if (oper.width.count > arg_len)
+		*str = flag_zero_str(*str, oper.width.count - arg_len);
+	if (oper.accuracy.count)
+		*str = flag_zero_str(*str, oper.width.count - oper.accuracy.count);
+}
+
 int str_arg(char *arg, s_operation oper)
 {
 	int i;
-	char * str;
+	char *str;
 	int arg_len;
 
 	if (!arg)
@@ -17,14 +28,7 @@ int str_arg(char *arg, s_operation oper)
 	if (oper.width.count > (int)ft_strlen(str))
 		i += width_check_str(&str, oper);
 	if (oper.flag.is_zero)
-	{
-		if (oper.width.count - oper.accuracy.count - arg_len > 0)
-			str = flag_zero_str(str, oper.width.count - oper.accuracy.count- arg_len);
-		if (oper.width.count > arg_len)
-			str = flag_zero_str(str, oper.width.count - arg_len);
-		if (oper.accuracy.count)
-			str = flag_zero_str(str, oper.width.count - oper.accuracy.count);
-	}
+		choice_zero_str(&str, oper, arg_len);
 	while (*(str + i))
 	{
 		if (write(1, str + i, 1) == -1)
@@ -33,6 +37,21 @@ int str_arg(char *arg, s_operation oper)
 	}
 	free(str);
 	return (i);
+}
+
+
+int char_null (int arg, char **str, s_operation op)
+{
+	int i;
+	i = op.width.count;
+	if (op.flag.is_minus)
+		write (1, &arg, 1);
+	while (--i > 0)
+		write(1, " ", 1);
+	if (!op.flag.is_minus)
+		write(1, &arg, 1);
+	free(*str);
+	return (op.width.count > 0 ? op.width.count : 1);
 }
 
 int char_arg(int arg, s_operation oper)
@@ -45,19 +64,7 @@ int char_arg(int arg, s_operation oper)
 
 	i = -1;
 	if (arg == (char) '\0')
-	{
-		i = oper.width.count;
-		if (oper.flag.is_minus)
-			write (1, &arg, 1);
-		while (--i > 0)
-			write(1, " ", 1);
-		if (!oper.flag.is_minus)
-			write(1, &arg, 1);
-//		if (arg == (char) '\0' && !oper.width.count)
-//			write(1, &arg, 1);
-		free(str);
-		return (oper.width.count > 0 ? oper.width.count : 1);
-	}
+		return(char_null(arg, &str, oper));
 	if (oper.width.count > (int)ft_strlen(str))
 		i += width_check_str(&str, oper);
 	if (oper.flag.is_zero)
@@ -66,8 +73,6 @@ int char_arg(int arg, s_operation oper)
 		if (write(1, str + i, 1) == -1)
 			return (-1);
 	free(str);
-//	if (arg == 0)
-//		return (1);
 	return (i);
 }
 
@@ -77,19 +82,20 @@ int		unsigned_arg (unsigned int arg, s_operation oper)
 	int i;
 
 	i = 0;
-//	str = ft_itoa(arg);
 	if (oper.accuracy.count || oper.accuracy.is_zero)
 		oper.flag.is_zero = 0;
 	str = ft_utoa(arg);   // не подтягивается
 	if (*str == '0' && !oper.width.count && oper.accuracy.is_zero)
+	{
+		free(str);
 		return (0);
+	}
 	if (oper.accuracy.count > 0)
 		i += accuracy_check(&str, oper);
 	if (oper.width.count >= (int)ft_strlen(str))
 		i += width_check_uint(&str, oper);
 	i += print_line(&str);
-	if (*str)			///// Wow, something interesting
-		free (str);   ////// Need to clear this shit
+		free (str - i);
 	str = NULL;
 	return (i);
 }
@@ -132,12 +138,24 @@ static char	check_hex_high (int n)
 	return (-1);
 }
 
-int		ptr_arg (unsigned long int arg, s_operation oper)
+void	dec_hex(char **str, unsigned int len,
+			 unsigned long int arg)
+{
+	unsigned int	rem;
+
+	while (arg || arg / 16)
+	{
+		rem = arg % 16;
+		arg /= 16;
+		(*(*str + --len)) = check_hex_low(rem);
+	}
+}
+
+int		ptr_arg(unsigned long int arg, s_operation oper)
 {
 	char 			*str;
 	unsigned int	i;
 	unsigned int 	len;
-	unsigned int	rem;
 	char			*tmp;
 
 	len = un_dig(arg) + 1;
@@ -145,12 +163,7 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 	str = ft_calloc ((len), sizeof(char));
 	if (!arg)
 		str[0] = '0';
-	while (arg || arg / 16  )
-	{
-		rem = arg % 16;
-		arg /= 16;
-		str[--i] = check_hex_low(rem);
-	}
+	dec_hex(&str, len, arg);
 	i = 0;
 	while (!ft_isalnum(str[i]) && i < len)
 		str[i++] = '*';
@@ -160,12 +173,11 @@ int		ptr_arg (unsigned long int arg, s_operation oper)
 		return (-1);
 	free (str);
 	str = ft_strjoin("0x", tmp);
-
+	free(tmp);
 	width_check_str(&str, oper);
 	i = 0;
 	i += print_line(&str);
-	free(tmp);
-	//free(str);
+	free(str - i);
 	return (i);
 }
 
@@ -178,8 +190,6 @@ int		accuracy_hex_check(char **str, s_operation oper)
 	int step;
 
 	str_len = ft_strlen(*str);
-//	if (oper.flag.is_zero)
-//		oper.width.count++;
 	step = oper.accuracy.count;
 	if (str_len < oper.accuracy.count)
 	{
@@ -191,7 +201,7 @@ int		accuracy_hex_check(char **str, s_operation oper)
 	}
 	else
 		step = str_len;
-	if (oper.width.count > oper.accuracy.count && oper.width.count > str_len/*&& oper.accuracy.count != 0 && !oper.accuracy.is_zero*/)
+	if (oper.width.count > oper.accuracy.count && oper.width.count > str_len)
 	{
 		if (oper.flag.is_zero && !oper.accuracy.count && !oper.accuracy.is_zero)
 			i = 48; //48
@@ -255,6 +265,7 @@ int		hex_arg (unsigned int arg, s_operation oper, int is_low)
 		accuracy_hex_check(&str, oper);
 	i = 0;
 	i += print_line(&str);
+	free(str - i);
 	return (i);
 }
 
