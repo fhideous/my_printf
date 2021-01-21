@@ -48,3 +48,9 @@ int					space_count(char *str)
 			count++;
 	return (count);
 }
+
+void				ft_free(char **str)
+{
+	free(*str);
+	*str = NULL;
+}

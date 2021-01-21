@@ -26,6 +26,25 @@ int		join_and_return(char *add, char **str)
 	return (0);
 }
 
+void			*ft1_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char		*ptr;
+	const unsigned char	*src_ptr;
+
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	ptr = (unsigned char*)dst;
+	src_ptr = (unsigned char*)src;
+	if (src_ptr < ptr)
+		while (len--)
+			*(ptr + len) = *(src_ptr + len);
+	else
+		while (len--)
+			*ptr++ = *src_ptr++;
+	return (dst);
+}
+
+
 int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
 {
 	char *tmp;
@@ -39,11 +58,16 @@ int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
 	}
 	else
 	{
-		*str = ft_memmove(*str + 1, *str, n_len);
+		if ((int)ft_strlen(*str) > n_len)
+			*str = ft1_memmove(*str + 1, *str, n_len);
 		if (**str != '0' || oper.accuracy.count)
 			(*str) = *str - 1;
 		**str = '-';
+		//*(*str + n_len) = '\0';
+		return (1);
 	}
+//	*str = *str - 1;
+//	free(*str);
 	return (0);
 }
 
@@ -52,6 +76,7 @@ int		add_minus(char **str, int arg, s_operation oper)
 	int i;
 	int n_len;
 	int check_malloc;
+
 
 	n_len = (int)ft_strlen(*str) - space_count(*str);
 	check_malloc = 0;
@@ -71,7 +96,7 @@ int		add_minus(char **str, int arg, s_operation oper)
 		check_malloc = add_minus_to_naked_numb(str, n_len, oper);
 	if (check_malloc == -1)
 		return (-1);
-	return (1);
+	return (0);
 }
 
 int		int_zero_processing(char **str, s_operation oper)
@@ -86,6 +111,7 @@ int		int_zero_processing(char **str, s_operation oper)
 	{
 		if (!(new_str = line_from_same_asymb(' ', oper.width.count)))
 			return (-1);
+		free(*str);
 		*str = new_str;
 	}
 	if (!*str)
@@ -114,8 +140,10 @@ int		int_arg(long int arg, s_operation oper)
 	if (oper.width.count > (int)ft_strlen(str))
 		i += width_check(&str, oper);
 	if (arg < 0)
-		if (add_minus(&str, -1 * arg, oper) == -1)
+		if ((i += add_minus(&str, -1 * arg, oper)) == -1)
 			return (-1);
 	i += print_line(&str);
+	str = str - i;
+	ft_free(&str);
 	return (i);
 }

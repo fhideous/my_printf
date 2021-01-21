@@ -39,7 +39,7 @@ void	print_n_char(int ch, int n);
 int		print_backslash(char** str);
 int		print_percent (char** str);
 int		print_line(char** str);
-
+void				ft_free(char **str);
 
 void	struct_set (s_operation *oper);
 void	find_flag(char **str, s_operation *oper);
