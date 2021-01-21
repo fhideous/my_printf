@@ -11,7 +11,9 @@ set(SOURCE_DIR /Users/fhideous/Desktop/fhideous/printf3.0/git/libft/libft.a)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
 set(SOURCES main.c git/src/ft_printf.c git/src/print_naked_line.c git/src/find_operation.c
-        git/src/writing_specifier.c git/src/some_common_fun.c git/src/implement_operatios.c)
+        git/src/writing_specifier.c git/src/some_common_fun.c git/src/implement_operatios.c
+        git/src/writing_c_arg.c git/src/writing_int_arg.c git/src/sstuff_hex.c
+        git/src/writing_s_arg.c git/src/writing_hex_arg.c git/src/star_processing.c)
 
 set(git/headers git/headers/libft.h git/headers/ev_y_need_printf.h git/headers/ft_printf.h)
 

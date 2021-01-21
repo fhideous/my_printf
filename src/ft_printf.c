@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/21 15:33:45 by fhideous          #+#    #+#             */
+/*   Updated: 2021/01/21 15:33:51 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/ft_printf.h"
 
-int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
+int				specifier_processing(va_list *ap, char **str,
+												s_operation oper, int *count)
 {
 	int n;
 
@@ -18,10 +31,10 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	if (**str == 'p')
 		n = ptr_arg((unsigned long int)va_arg(*ap, void *), oper);
 	if (**str == 'x')
-		n = hex_arg(va_arg(*ap,  unsigned int), oper, 1);
+		n = hex_arg(va_arg(*ap, unsigned int), oper, 1);
 	if (**str == 'X')
-		n = hex_arg(va_arg(*ap,  unsigned int ), oper, 0);
-	if(n != -1)
+		n = hex_arg(va_arg(*ap, unsigned int), oper, 0);
+	if (n != -1)
 		*count += n;
 	else
 		return (-1);
@@ -29,43 +42,12 @@ int specifier_processing(va_list *ap, char **str, s_operation oper, int *count)
 	return (0);
 }
 
-int		check_star (const char * str,  va_list *ap, s_operation *op)
+int				ft_printf(const char *src_str, ...)
 {
-	int i;
-
-	i = -1;
-	while (*(str + ++i) != '*' && !ft_is_spec((str[i])));
-	if (*(str + i) != '*')
-		return (1);
-	if (*(str + i + 1) == '.' ||
-	(ft_isalpha(*(str + i + 1)) && *(str + i - 1) != '.'))
-	{
-		op->width.count = va_arg(*ap, int);
-		if (op->width.count < 0)
-		{
-			op->width.count *= -1;
-			op->flag.is_minus = 1;
-		}
-	}
-	if (*(str + i - 1) != '.')
-		while (*(str + ++i) != '*' && !ft_isalpha((str[i])));
-	if (*(str + i) == '*' && *(str + i - 1) == '.')
-	{
-		op->accuracy.count = va_arg(*ap,int);
-		if (op->accuracy.count == 0)
-			op->accuracy.is_zero = 1;
-		if (op->accuracy.count < 0)
-			op->accuracy.count = 0;
-	}
-	return (0);
-}
-
-int		ft_printf(const char *src_str, ...)
-{
-	va_list ap;
-	int count;
-	char *str;
-	s_operation operation;
+	va_list		ap;
+	int			count;
+	char		*str;
+	s_operation	operation;
 
 	count = 0;
 	str = (char *)src_str;

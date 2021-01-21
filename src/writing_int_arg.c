@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   writing_int_arg.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/21 15:34:22 by fhideous          #+#    #+#             */
+/*   Updated: 2021/01/21 15:34:25 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/ev_y_need_printf.h"
 
 int		join_and_return(char *add, char **str)
@@ -74,13 +86,11 @@ int		int_zero_processing(char **str, s_operation oper)
 	{
 		if (!(new_str = line_from_same_asymb(' ', oper.width.count)))
 			return (-1);
-//		free(*str);
 		*str = new_str;
 	}
 	if (!*str)
 		return (-1);
 	i += print_line(str);
-//	free(new_str);
 	return (i);
 }
 
@@ -107,11 +117,5 @@ int		int_arg(long int arg, s_operation oper)
 		if (add_minus(&str, -1 * arg, oper) == -1)
 			return (-1);
 	i += print_line(&str);
-
-//	if (arg < 0)
-//		i++;
-//	str = str - 4;
-//	free(str);
-	//free (str - i);   ////// Need to clear this shit
 	return (i);
 }

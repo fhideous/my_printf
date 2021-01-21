@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_naked_line.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/21 15:33:57 by fhideous          #+#    #+#             */
+/*   Updated: 2021/01/21 15:34:01 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/ev_y_need_printf.h"
 #include "stdio.h"
 
@@ -25,7 +37,7 @@ int		print_percent(char **str)
 	return (0);
 }
 
-void print_n_char(int ch, int n)
+void	print_n_char(int ch, int n)
 {
 	while (n--)
 		write(1, &ch, 1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   some_common_fun.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/21 15:34:02 by fhideous          #+#    #+#             */
+/*   Updated: 2021/01/21 15:34:07 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/ev_y_need_printf.h"
 
 long int			n_dig(long int a)
@@ -35,29 +47,4 @@ int					space_count(char *str)
 		if (str[i] == ' ')
 			count++;
 	return (count);
-}
-
-int					write_str(char *str)
-{
-	int i;
-
-	i = 0;
-	while (*(str + i))
-	{
-		if (write(1, str + i, 1) == -1)
-			return (-1);
-		i++;
-	}
-	return (i);
-}
-
-int					write_n_symb(int chr, int n)
-{
-	int i;
-
-	i = n;
-	while (n-- > 0)
-		if (write(1, &chr, 1) == -1)
-			return (-1);
-	return (i);
 }
