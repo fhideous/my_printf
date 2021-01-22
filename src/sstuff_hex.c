@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
 static char	check_hex_low(int n)
 {
@@ -82,7 +82,7 @@ void		str_reverse(char **str, int step)
 	}
 }
 
-int			hex_check_width(char **str, int step, s_operation oper)
+int			hex_check_width(char **str, int step, t_operation oper)
 {
 	int		i;
 	char	*tmp;

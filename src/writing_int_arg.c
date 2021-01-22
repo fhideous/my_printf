@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
 int		join_and_return(char *add, char **str)
 {
@@ -26,7 +26,7 @@ int		join_and_return(char *add, char **str)
 	return (0);
 }
 
-int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
+int		add_minus_to_naked_numb(char **str, int n_len, t_operation oper)
 {
 	char *tmp;
 
@@ -49,7 +49,7 @@ int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
 	return (0);
 }
 
-int		add_minus(char **str, int arg, s_operation oper)
+int		add_minus(char **str, int arg, t_operation oper)
 {
 	int	i;
 	int n_len;
@@ -76,7 +76,7 @@ int		add_minus(char **str, int arg, s_operation oper)
 	return (0);
 }
 
-int		int_zero_processing(char **str, s_operation oper)
+int		int_zero_processing(char **str, t_operation oper)
 {
 	char	*new_str;
 	int		i;
@@ -97,7 +97,7 @@ int		int_zero_processing(char **str, s_operation oper)
 	return (i);
 }
 
-int		int_arg(long int arg, s_operation oper)
+int		int_arg(long int arg, t_operation oper)
 {
 	char	*str;
 	int		i;

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf.h"
+#include "ft_printf.h"
 
 int				specifier_processing(va_list *ap, char **str,
-												s_operation oper, int *count)
+										t_operation oper, int *count)
 {
 	int n;
 
@@ -47,7 +47,7 @@ int				ft_printf(const char *src_str, ...)
 	va_list		ap;
 	int			count;
 	char		*str;
-	s_operation	operation;
+	t_operation	operation;
 
 	count = 0;
 	str = (char *)src_str;

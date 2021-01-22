@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
 char	*line_from_same_asymb(int symb, int len)
 {
@@ -29,7 +29,7 @@ char	*line_from_same_asymb(int symb, int len)
 	return (str);
 }
 
-int		width_accuracy_diff(char **str, s_operation oper, int str_len)
+int		width_accuracy_diff(char **str, t_operation oper, int str_len)
 {
 	char *same_symb_l;
 
@@ -49,7 +49,7 @@ int		width_accuracy_diff(char **str, s_operation oper, int str_len)
 	return (0);
 }
 
-int		width_check(char **str, s_operation oper)
+int		width_check(char **str, t_operation oper)
 {
 	int diff_w_a;
 	int str_len;
@@ -62,7 +62,7 @@ int		width_check(char **str, s_operation oper)
 	return (0);
 }
 
-int		width_check_uint(char **str, s_operation oper)
+int		width_check_uint(char **str, t_operation oper)
 {
 	int diff_w_a;
 	int str_len;
@@ -79,7 +79,7 @@ int		width_check_uint(char **str, s_operation oper)
 	return (0);
 }
 
-int		accuracy_check(char **str, s_operation oper)
+int		accuracy_check(char **str, t_operation oper)
 {
 	int		diff_w_str;
 	char	*same_symb_l;

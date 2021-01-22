@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-static void		star_width(va_list *ap, s_operation *op)
+static void		star_width(va_list *ap, t_operation *op)
 {
 	op->width.count = va_arg(*ap, int);
 	if (op->width.count < 0)
@@ -22,7 +22,7 @@ static void		star_width(va_list *ap, s_operation *op)
 	}
 }
 
-static void		star_accuracy(va_list *ap, s_operation *op)
+static void		star_accuracy(va_list *ap, t_operation *op)
 {
 	op->accuracy.count = va_arg(*ap, int);
 	if (op->accuracy.count == 0)
@@ -31,7 +31,7 @@ static void		star_accuracy(va_list *ap, s_operation *op)
 		op->accuracy.count = 0;
 }
 
-int				check_star(const char *str, va_list *ap, s_operation *op)
+int				check_star(const char *str, va_list *ap, t_operation *op)
 {
 	int i;
 

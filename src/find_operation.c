@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-void	struct_set(s_operation *oper)
+void	struct_set(t_operation *oper)
 {
 	oper->accuracy.count = 0;
 	oper->accuracy.is_argument = 0;
@@ -26,7 +26,7 @@ void	struct_set(s_operation *oper)
 	oper->flag.is_zero = 0;
 }
 
-void	find_flag(char **str, s_operation *oper)
+void	find_flag(char **str, t_operation *oper)
 {
 	if (*(*str += 1) == '-')
 	{
@@ -52,7 +52,7 @@ void	find_flag(char **str, s_operation *oper)
 	}
 }
 
-int		find_width(char **str, s_operation *oper)
+int		find_width(char **str, t_operation *oper)
 {
 	int width;
 
@@ -72,7 +72,7 @@ int		find_width(char **str, s_operation *oper)
 	return (0);
 }
 
-int		find_accuracy(char **str, s_operation *oper)
+int		find_accuracy(char **str, t_operation *oper)
 {
 	int skip;
 
@@ -94,7 +94,7 @@ int		find_accuracy(char **str, s_operation *oper)
 	return (0);
 }
 
-void	find_oper(char **str, s_operation *oper)
+void	find_oper(char **str, t_operation *oper)
 {
 	find_flag(&*str, *&oper);
 	*str += find_width(&*str, *&oper);

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
-#include "stdio.h"
+#include "ev_y_need_printf.h"
 
 int		print_backslash(char **str)
 {

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-int			unsigned_arg(unsigned int arg, s_operation oper)
+int			unsigned_arg(unsigned int arg, t_operation oper)
 {
 	char	*str;
 	int		i;
@@ -36,7 +36,7 @@ int			unsigned_arg(unsigned int arg, s_operation oper)
 	return (i);
 }
 
-int			percant_arg(int arg, s_operation oper)
+int			percant_arg(int arg, t_operation oper)
 {
 	int i;
 

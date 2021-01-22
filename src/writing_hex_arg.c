@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-int			ptr_arg(unsigned long int arg, s_operation oper)
+int			ptr_arg(unsigned long int arg, t_operation oper)
 {
 	char			*str;
 	unsigned int	i;
@@ -41,7 +41,7 @@ int			ptr_arg(unsigned long int arg, s_operation oper)
 	return (i);
 }
 
-int			accuracy_hex_check(char **str, s_operation oper)
+int			accuracy_hex_check(char **str, t_operation oper)
 {
 	char	*same_symb_l;
 	int		str_len;
@@ -68,7 +68,7 @@ int			accuracy_hex_check(char **str, s_operation oper)
 	return (0);
 }
 
-int			hex_arg(unsigned int arg, s_operation oper, int is_low)
+int			hex_arg(unsigned int arg, t_operation oper, int is_low)
 {
 	char			*str;
 	int				i;

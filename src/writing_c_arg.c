@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-static int		char_null(int arg, char **str, s_operation op)
+static int		char_null(int arg, char **str, t_operation op)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ static int		char_null(int arg, char **str, s_operation op)
 	return (op.width.count > 0 ? op.width.count : 1);
 }
 
-int				char_arg(int arg, s_operation oper)
+int				char_arg(int arg, t_operation oper)
 {
 	int		i;
 	char	*str;

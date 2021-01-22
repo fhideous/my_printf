@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhideous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/22 19:44:20 by fhideous          #+#    #+#             */
+/*   Updated: 2021/01/22 19:44:22 by fhideous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -36,7 +48,6 @@ char	**ft_split(char const *s, char c);
 
 char	*ft_itoa(size_t n);
 char	*ft_utoa(unsigned int n);
-//char	*ft_litoa(long int n);
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 

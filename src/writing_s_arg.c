@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ev_y_need_printf.h"
+#include "ev_y_need_printf.h"
 
-static void		choice_zero_str(char **str, s_operation oper, int arg_len)
+static void		choice_zero_str(char **str, t_operation oper, int arg_len)
 {
 	if (oper.width.count - oper.accuracy.count - arg_len > 0)
 		*str = flag_zero_str(*str, oper.width.count - oper.accuracy.count -
@@ -32,7 +32,7 @@ char			*flag_zero_str(char *str, int len)
 	return (str);
 }
 
-int				width_check_str(char **str, s_operation oper)
+int				width_check_str(char **str, t_operation oper)
 {
 	int		diff_w_a;
 	char	*same_symb_l;
@@ -56,7 +56,7 @@ int				width_check_str(char **str, s_operation oper)
 	return (0);
 }
 
-int				accuracy_check_str(char **str, s_operation oper)
+int				accuracy_check_str(char **str, t_operation oper)
 {
 	int		diff_w_str;
 
@@ -66,7 +66,7 @@ int				accuracy_check_str(char **str, s_operation oper)
 	return (0);
 }
 
-int				str_arg(char *arg, s_operation oper)
+int				str_arg(char *arg, t_operation oper)
 {
 	int		i;
 	char	*str;
