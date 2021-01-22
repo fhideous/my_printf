@@ -19,8 +19,7 @@ char	*line_from_same_asymb(int symb, int len)
 
 	if (len < 0)
 		return (NULL);
-	str = malloc((len + 1) * sizeof(char));
-	if (!str)
+	if (!(str = malloc((len + 1) * sizeof(char))))
 		return (NULL);
 	i = -1;
 	while (++i < len)
