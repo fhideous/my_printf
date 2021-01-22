@@ -93,7 +93,7 @@ int		accuracy_check(char **str, s_operation oper)
 			return (-1);
 		same_symb_l = ft_memmove(same_symb_l + diff_w_str,
 							*str, oper.accuracy.count) - diff_w_str;
-		//ft_free(&str);
+		ft_free(str);
 		*str = same_symb_l;
 		return (0);
 	}

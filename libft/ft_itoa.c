@@ -37,11 +37,12 @@ char	*crt_str(long n, int len, int is_neg)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(size_t n)
 {
 	int				len;
 	unsigned char	is_neg;
 	long			new_n;
+	char			*tmp;
 
 	new_n = (long)n;
 	len = 0;
@@ -53,13 +54,15 @@ char	*ft_itoa(int n)
 		new_n *= -1;
 	}
 	len += ft_len_n(n);
-	return (crt_str(new_n, len, is_neg));
+	tmp = crt_str(new_n, len, is_neg);
+	return (tmp);
 }
 
 char	*ft_litoa(long int n)
 {
 	int				len;
 	unsigned char	is_neg;
+	char			*tmp;
 
 	len = 0;
 	is_neg = 0;
@@ -70,5 +73,6 @@ char	*ft_litoa(long int n)
 		n *= -1;
 	}
 	len += ft_len_n(n);
-	return (crt_str(n, len, is_neg));
+	tmp = crt_str(n, len, is_neg);
+	return (tmp);
 }

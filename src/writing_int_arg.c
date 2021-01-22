@@ -26,25 +26,6 @@ int		join_and_return(char *add, char **str)
 	return (0);
 }
 
-void			*ft1_memmove(void *dst, const void *src, size_t len)
-{
-	unsigned char		*ptr;
-	const unsigned char	*src_ptr;
-
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	ptr = (unsigned char*)dst;
-	src_ptr = (unsigned char*)src;
-	if (src_ptr < ptr)
-		while (len--)
-			*(ptr + len) = *(src_ptr + len);
-	else
-		while (len--)
-			*ptr++ = *src_ptr++;
-	return (dst);
-}
-
-
 int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
 {
 	char *tmp;
@@ -59,24 +40,20 @@ int		add_minus_to_naked_numb(char **str, int n_len, s_operation oper)
 	else
 	{
 		if ((int)ft_strlen(*str) > n_len)
-			*str = ft1_memmove(*str + 1, *str, n_len);
+			*str = ft_memmove(*str + 1, *str, n_len);
 		if (**str != '0' || oper.accuracy.count)
 			(*str) = *str - 1;
 		**str = '-';
-		//*(*str + n_len) = '\0';
 		return (1);
 	}
-//	*str = *str - 1;
-//	free(*str);
 	return (0);
 }
 
 int		add_minus(char **str, int arg, s_operation oper)
 {
-	int i;
+	int	i;
 	int n_len;
 	int check_malloc;
-
 
 	n_len = (int)ft_strlen(*str) - space_count(*str);
 	check_malloc = 0;
@@ -128,7 +105,7 @@ int		int_arg(long int arg, s_operation oper)
 	i = 0;
 	if (oper.accuracy.count || oper.accuracy.is_zero)
 		oper.flag.is_zero = 0;
-	if (!(str = ft_litoa(arg > 0 ? arg : -arg)))
+	if (!(str = ft_itoa(arg > 0 ? arg : -arg)))
 		return (-1);
 	if (*str == '0' && oper.accuracy.is_zero)
 	{
