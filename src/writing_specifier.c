@@ -52,5 +52,10 @@ int			percant_arg(int arg, t_operation oper)
 		if (!oper.flag.is_minus)
 			write(1, &arg, 1);
 	}
+	else if (oper.accuracy.is_zero)
+	{
+		write(1, "%", 1);
+		return (1);
+	}
 	return (oper.width.count ? oper.width.count : 0);
 }

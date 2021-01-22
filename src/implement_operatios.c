@@ -41,7 +41,7 @@ int		width_accuracy_diff(char **str, t_operation oper, int str_len)
 		if (oper.flag.is_zero)
 			ft_memset(same_symb_l, '0', oper.width.count);
 		same_symb_l = ft_memmove(same_symb_l + oper.width.count -
-				str_len, *str, str_len) - oper.width.count + str_len;
+								 str_len, *str, str_len) - oper.width.count + str_len;
 	}
 	ft_free(str);
 	*str = same_symb_l;
@@ -91,7 +91,7 @@ int		accuracy_check(char **str, t_operation oper)
 		if (!(same_symb_l = line_from_same_asymb('0', oper.accuracy.count)))
 			return (-1);
 		same_symb_l = ft_memmove(same_symb_l + diff_w_str,
-							*str, oper.accuracy.count) - diff_w_str;
+								 *str, oper.accuracy.count) - diff_w_str;
 		ft_free(str);
 		*str = same_symb_l;
 		return (0);

@@ -86,9 +86,9 @@ int		find_accuracy(char **str, t_operation *oper)
 	}
 	else if (**str == '*')
 		return (1);
-	else if (ft_is_spec(**str))
+	else if (ft_is_spec(**str) || **str == '%')
 		oper->accuracy.is_zero = 1;
-	while (!ft_isalpha(*(*str + skip)))
+	while (!ft_isalpha(*(*str + skip)) && *(*str + skip) != '%')
 		skip++;
 	*str += (oper->accuracy.is_argument + skip);
 	return (0);
