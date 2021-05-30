@@ -1,23 +1,27 @@
-# 42TESTERS-PRINTF
+# MY_LITTLE_PRINTF
 
-If you want to be a good developer, please make your own tests. You should only use testers when you're correcting someone or just before submitting your work to see what tests you haven't thought of doing. If you finish a project without testing it yourself, you've only done a quarter of it.
+Program name: libftprintf.a
 
-1 - cd to the folder with your fonctions
+Turn in files: *.c, */*.c, *.h, */*.h, Makefile
 
-2 - git clone https://github.com/Mazoise/42TESTERS-PRINTF.git
+Makefileall should contain: clean, fclean, re;
 
-3 - cd 42TESTERS-PRINTF
+External functs: malloc, free, write, va_start, va_arg, va_copy,va_end
 
-4 - bash run_test.sh
-
-5 - check diff.txt in case of errors
-
-Path to your project's Makefile can be changed in srcs/Makefile (Default : LIBPATH = ../../)
-
-WARNING if you are working on Linux : Some undefined behaviours are present in this tester because they might be tested by moulinette. For example null strings (line 185 of my main) and null pointers (lines 156-163 and line 169) which will not give the same result on linux and macos.
+Libft authorizedyesDescription: Write a library that contains ft_printf, a functionthat will mimic the real printf
 
 
-\
-<br>
-Remerciements :
-addubois pour la troll face et hellokitty
+
+Task:
+
+•The prototype of ft_printf should beint ft_printf(const char *, ...);
+
+•You have to recode thelibc’sprintffunction
+
+•It must not do the buffer management like the realprintf
+
+•It will manage the following conversions:cspdiuxX%
+
+•It will manage any combination of the following flags: ’-0.*’ and minimum fieldwidth with all conversions
+
+•It will be compared with the real printf•You must use the commandarto create your librairy, using the commandlibtoolis forbidden
